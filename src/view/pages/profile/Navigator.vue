@@ -69,6 +69,49 @@
           </router-link>
 
         </div>
+        <div class="navi-item mb-2">
+          <router-link
+            to="/profile/book-history"
+            v-slot="{ href, navigate, isExactActive }"
+          >
+            <a
+              class="navi-link py-4"
+              :class="{'active': isExactActive}"
+              :href="href"
+              @click="navigate"
+              style="cursor:pointer"
+            >
+              <span class="navi-icon mr-2">
+                <span class="svg-icon">
+                  <inline-svg src="/media/svg/icons/Home/Book-open.svg" />
+                </span>
+              </span>
+              <span class="navi-text font-size-lg">Book History</span>
+
+            </a>
+          </router-link>
+        </div>
+        <div class="navi-item mb-2">
+          <router-link
+            to="/profile/wish-list"
+            v-slot="{ href, navigate, isExactActive }"
+          >
+            <a
+              class="navi-link py-4"
+              :class="{'active': isExactActive}"
+              :href="href"
+              @click="navigate"
+              style="cursor:pointer"
+            >
+              <span class="navi-icon mr-2">
+                <span class="svg-icon">
+                  <inline-svg src="/media/svg/icons/General/Star.svg" />
+                </span>
+              </span>
+              <span class="navi-text font-size-lg">Wish List</span>
+            </a>
+          </router-link>
+        </div>
       </div>
     </div>
   </div>

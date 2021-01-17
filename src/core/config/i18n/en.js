@@ -20,6 +20,7 @@ export const locale = {
     "threeChrForSearch": "Type at least 3 characters for search.",
   },
   common: {
+    login: 'Login',
     email: "Email",
     phone: "Phone",
     save: "Save",

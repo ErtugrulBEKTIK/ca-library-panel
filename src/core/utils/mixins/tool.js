@@ -1,6 +1,10 @@
+import { formatDate } from "@/core/utils";
 import Swal from "sweetalert2";
 
 export const toolMixin = {
+  filters: {
+    formatDate,
+  },
   methods: {
     confirmDelete(){
       return Swal.fire({

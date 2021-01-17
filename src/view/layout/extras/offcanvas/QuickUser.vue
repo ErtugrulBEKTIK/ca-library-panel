@@ -29,7 +29,6 @@
       >
         <h3 class="font-weight-bold m-0">
           Profil
-          <small class="text-muted font-size-sm ml-2">12 messages</small>
         </h3>
         <a
           href="#"
@@ -42,7 +41,7 @@
       <!--end::Header-->
 
       <!--begin::Content-->
-      <perfect-scrollbar
+      <vue-perfect-scrollbar
         class="offcanvas-content pr-5 mr-n5 scroll"
         style="max-height: 90vh; position: relative;"
       >
@@ -59,7 +58,11 @@
             >
               {{currentUser.firstName}} {{currentUser.lastName}}
             </a>
-            <div class="text-muted mt-1">Üye</div>
+            <div class="text-muted mt-1">
+              <span v-if="currentUser.roleId === Roles.ADMIN">Yönetici</span>
+              <span v-if="currentUser.roleId === Roles.EDITOR">Editör</span>
+              <span v-if="currentUser.roleId === Roles.BASIC_USER">Üye</span>
+            </div>
             <div class="navi mt-2">
               <a href="#" class="navi-item">
                 <span class="navi-link p-0 pb-2">
@@ -108,16 +111,13 @@
               </div>
               <div class="navi-text">
                 <div class="font-weight-bold">Profilim</div>
-                <div class="text-muted">
-                  Hesap ayarları ve fazlası
-                </div>
               </div>
             </div>
           </router-link>
           <!--end:Item-->
           <!--begin::Item-->
           <router-link
-            to="/builder"
+            to="/profile/change-password"
             @click.native="closeOffcanvas"
             href="#"
             class="navi-item"
@@ -133,15 +133,14 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">My Messages</div>
-                <div class="text-muted">Inbox and tasks</div>
+                <div class="font-weight-bold">Change Password</div>
               </div>
             </div>
           </router-link>
           <!--end:Item-->
           <!--begin::Item-->
           <router-link
-            to="/builder"
+            to="/profile/book-history"
             @click.native="closeOffcanvas"
             href="#"
             class="navi-item"
@@ -150,22 +149,19 @@
               <div class="symbol symbol-40 bg-light mr-3">
                 <div class="symbol-label">
                   <span class="svg-icon svg-icon-md svg-icon-danger">
-                    <!--begin::Svg Icon-->
-                    <inline-svg src="/media/svg/icons/Files/Selected-file.svg" />
-                    <!--end::Svg Icon-->
+                    <inline-svg src="/media/svg/icons/Home/Book-open.svg" />
                   </span>
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">Kitaplarım</div>
-                <div class="text-muted">Okuduğum kitaplar</div>
+                <div class="font-weight-bold">Book History</div>
               </div>
             </div>
           </router-link>
           <!--end:Item-->
           <!--begin::Item-->
           <router-link
-            to="/builder"
+            to="/profile/wish-list"
             @click.native="closeOffcanvas"
             href="#"
             class="navi-item"
@@ -174,17 +170,12 @@
               <div class="symbol symbol-40 bg-light mr-3">
                 <div class="symbol-label">
                   <span class="svg-icon svg-icon-md svg-icon-primary">
-                    <!--begin::Svg Icon-->
-                    <inline-svg
-                      src="/media/svg/icons/Communication/Mail-opened.svg"
-                    />
-                    <!--end::Svg Icon-->
+                    <inline-svg src="/media/svg/icons/General/Star.svg" />
                   </span>
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">My Tasks</div>
-                <div class="text-muted">latest tasks and projects</div>
+                <div class="font-weight-bold">Wish List</div>
               </div>
             </div>
           </router-link>
@@ -192,7 +183,7 @@
         </div>
         <!--end::Nav-->
         <!--end::Notifications-->
-      </perfect-scrollbar>
+      </vue-perfect-scrollbar>
       <!--end::Content-->
     </div>
   </div>
@@ -209,41 +200,16 @@ import { mapGetters } from "vuex";
 import { LOGOUT } from "@/core/services/store/auth.module";
 import KTLayoutQuickUser from "@/assets/js/layout/extended/quick-user.js";
 import KTOffcanvas from "@/assets/js/components/offcanvas.js";
-
+import VuePerfectScrollbar from 'vue-perfect-scrollbar'
+import {Roles} from '@/core/data/enum'
 export default {
+  components: {
+    VuePerfectScrollbar
+  },
   name: "KTQuickUser",
   data() {
     return {
-      list: [
-        {
-          title: "Another purpose persuade",
-          desc: "Due in 2 Days",
-          alt: "+28%",
-          svg: "media/svg/icons/Home/Library.svg",
-          type: "warning"
-        },
-        {
-          title: "Would be to people",
-          desc: "Due in 2 Days",
-          alt: "+50%",
-          svg: "media/svg/icons/Communication/Write.svg",
-          type: "success"
-        },
-        {
-          title: "Purpose would be to persuade",
-          desc: "Due in 2 Days",
-          alt: "-27%",
-          svg: "media/svg/icons/Communication/Group-chat.svg",
-          type: "danger"
-        },
-        {
-          title: "The best product",
-          desc: "Due in 2 Days",
-          alt: "+8%",
-          svg: "media/svg/icons/General/Attachment2.svg",
-          type: "info"
-        }
-      ]
+      Roles
     };
   },
   mounted() {
@@ -261,10 +227,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentUser']),
-    picture() {
-      return process.env.BASE_URL + "media/users/300_21.jpg";
-    }
+    ...mapGetters(['currentUser'])
   }
 };
 </script>

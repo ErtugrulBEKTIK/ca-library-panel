@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/core/services/store';
-import { VERIFY_AUTH } from '@/core/services/store/auth.module';
+import {Roles} from '@/core/data/enum';
 
 Vue.use(Router);
 
@@ -33,6 +33,16 @@ export default new Router({
               path: 'change-password',
               name: 'change-password',
               component: () => import('@/view/pages/profile/ChangePassword/ChangePassword'),
+            },
+            {
+              path: 'book-history',
+              name: 'book-history',
+              component: () => import('@/view/pages/profile/History/BookHistory'),
+            },
+            {
+              path: 'wish-list',
+              name: 'wish-list',
+              component: () => import('@/view/pages/profile/Wishes/WishList'),
             }
           ],
         },
@@ -41,8 +51,14 @@ export default new Router({
     {
       path: '/admin',
       redirect: '/admin/book',
-      beforeEnter: (to, from, next) =>
-        Promise.all([store.dispatch(VERIFY_AUTH)]).then(next),
+      beforeEnter: (to, from, next) => {
+        const roleId = store.getters.currentUser.roleId;
+        if(roleId === Roles.ADMIN || roleId === Roles.EDITOR){
+          next()
+        }else {
+          alert('You are not allowed to enter')
+        }
+      },
       component: () => import('@/view/layout/Layout'),
       children: [
         {
@@ -59,6 +75,16 @@ export default new Router({
           path: 'category',
           name: 'category',
           component: () => import('@/view/pages/admin/category/CategoryList'),
+        },
+        {
+          path: 'user',
+          name: 'user',
+          component: () => import('@/view/pages/admin/user/UserList'),
+        },
+        {
+          path: 'comment',
+          name: 'comment',
+          component: () => import('@/view/pages/admin/comment/CommentList'),
         },
       ],
     },

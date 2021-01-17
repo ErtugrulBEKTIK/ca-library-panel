@@ -1,25 +1,47 @@
 <template>
-  <ul class="navi navi-hover py-4">
-    <template v-for="(item, i) in languages">
-      <li
-        class="navi-item"
-        :class="{ 'navi-item-active': isActiveLanguage(item.lang) }"
-        :key="i"
+  <b-dropdown
+    size="sm"
+    variant="link"
+    toggle-class="topbar-item text-decoration-none"
+    no-caret
+    right
+    no-flip
+  >
+    <template v-slot:button-content>
+      <div
+        class="btn btn-icon btn-hover-transparent-white btn-dropdown btn-lg mr-1 pulse pulse-primary"
       >
-        <a
-          href="#"
-          class="navi-link"
-          v-bind:data-lang="item.lang"
-          v-on:click="selectedLanguage"
-        >
-          <span class="symbol symbol-20 mr-3">
-            <img :src="item.flag" alt="" />
-          </span>
-          <span class="navi-text">{{ item.name }}</span>
-        </a>
-      </li>
+        <span class="symbol symbol-20">
+          <img :src="languages.find(l => l.lang === $i18n.locale).flag" alt="" />
+        </span>
+      </div>
     </template>
-  </ul>
+    <b-dropdown-text tag="div" class="min-w-md-150px">
+      <form>
+        <ul class="navi navi-hover py-4">
+          <template v-for="(item, i) in languages">
+            <li
+              class="navi-item"
+              :class="{ 'navi-item-active': $i18n.locale === item.lang }"
+              :key="i"
+            >
+              <a
+                href="#"
+                class="navi-link"
+                @click="selectedLanguage(item.lang)"
+              >
+              <span class="symbol symbol-20 mr-3">
+                <img :src="item.flag" alt="" />
+              </span>
+                <span class="navi-text">{{ item.name }}</span>
+              </a>
+            </li>
+          </template>
+        </ul>
+      </form>
+    </b-dropdown-text>
+  </b-dropdown>
+
 </template>
 
 <script>
@@ -33,20 +55,9 @@ export default {
     };
   },
   methods: {
-    selectedLanguage(e) {
-      const el = e.target.closest(".navi-link");
-      const lang = el.getAttribute("data-lang");
-
+    selectedLanguage(lang) {
+      this.$i18n.locale = lang;
       i18nService.setActiveLanguage(lang);
-
-      this.$emit(
-        "language-changed",
-        this.languages.find(val => {
-          return val.lang === lang;
-        })
-      );
-
-      window.location.reload();
     },
     isActiveLanguage(current) {
       return this.activeLanguage === current;

@@ -1,5 +1,5 @@
 import Vue from "vue";
-import PerfectScrollbar from "vue2-perfect-scrollbar";
+import VuePerfectScrollbar from "vue-perfect-scrollbar";
 
 // Perfect scrollbar
-Vue.use(PerfectScrollbar);
+Vue.component(VuePerfectScrollbar);

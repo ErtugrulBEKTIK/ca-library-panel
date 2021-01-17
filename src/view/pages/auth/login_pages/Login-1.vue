@@ -312,8 +312,8 @@ export default {
       state: "signin",
       // Remove this dummy login info
       form: {
-        email: "eb@gmail.com",
-        password: "123456"
+        email: "",
+        password: ""
       }
     };
   },

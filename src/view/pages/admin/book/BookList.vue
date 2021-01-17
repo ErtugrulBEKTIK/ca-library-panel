@@ -27,7 +27,7 @@
               <b-th>Basım Yılı</b-th>
               <b-th>Raf</b-th>
               <b-th>Barkod</b-th>
-              <b-th>İşlem</b-th>
+              <b-th style="min-width: 80px">İşlem</b-th>
             </b-tr>
           </b-thead>
           <b-tbody>
@@ -118,10 +118,11 @@ export default {
 
         if (isConfirmed) {
           await this.axios.delete("admin/books/" + id);
+
+          this.toast({ message: 'deleteSuccess', item: 'book' });
+          this.getBooks();
         }
 
-        this.toast({ message: 'deleteSuccess', item: 'book' });
-        this.getBooks();
       } catch (e) {
         this.toast({ type: "danger", message: "deleteError", item: "book" });
         console.log(e);

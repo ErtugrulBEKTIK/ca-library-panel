@@ -20,6 +20,7 @@ export const locale = {
     "threeChrForSearch": "Aramak için en az 3 karakter giriniz.",
   },
   common: {
+    login: 'Giriş Yap',
     email: "Email",
     phone: "Telefon",
     save: "Kaydet",

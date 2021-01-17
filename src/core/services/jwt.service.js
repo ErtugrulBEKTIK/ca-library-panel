@@ -1,3 +1,5 @@
+import ApiService from "@/core/services/api.service";
+
 const ID_TOKEN_KEY = "id_token";
 const ID_USER_KEY = "id_user";
 
@@ -7,6 +9,7 @@ export const getToken = () => {
 
 export const saveToken = token => {
   window.localStorage.setItem(ID_TOKEN_KEY, token);
+  ApiService.setHeader()
 };
 
 export const destroyToken = () => {

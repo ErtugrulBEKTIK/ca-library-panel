@@ -19,7 +19,7 @@ window.ClipboardJS = ClipboardJS;
 import i18n from "@/core/plugins/vue-i18n";
 import "@/core/plugins/portal-vue";
 import "@/core/plugins/bootstrap-vue";
-import "@/core/plugins/perfect-scrollbar";
+//import "@/core/plugins/perfect-scrollbar";
 import "@/core/plugins/highlight-js";
 import "@/core/plugins/inline-svg";
 import "@/core/plugins/apexcharts";
@@ -27,6 +27,7 @@ import "@/core/plugins/treeselect";
 import "@/core/plugins/metronic";
 import "@mdi/font/css/materialdesignicons.css";
 import "@/core/plugins/formvalidation";
+import "@/core/plugins/moment";
 import "@/core/plugins/vuelidate-error-extractor";
 import { validationMixin } from "vuelidate";
 import { toolMixin } from "@/core/utils/mixins/tool";
@@ -49,8 +50,8 @@ router.beforeEach((to, from, next) => {
 });
 
 new Vue({
+  i18n,
   router,
   store,
-  i18n,
   render: h => h(App)
 }).$mount("#app");

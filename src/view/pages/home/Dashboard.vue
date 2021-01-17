@@ -84,19 +84,18 @@
               </b-td>
               <b-td>
                 <span
-                  class="label label-lg label-inline"
-                  v-bind:class="`label-light-${item.status ? 'success': 'danger'}`"
-                  >{{ item.status ? 'Rafta' : 'Ödünç Verildi' }}</span
-                >
+                  v-if="item.status === BookStatus.AVAILABLE"
+                  class="label label-lg label-inline label-light-success">
+                  Rafta
+                </span>
+                <span
+                  v-if="item.status === BookStatus.BORROWED"
+                  class="label label-lg label-inline label-light-danger">
+                  Dışarıda
+                </span>
               </b-td>
               <b-td class="pr-0">
-                <a href="#" class="btn btn-icon btn-light btn-sm">
-                  <span class="svg-icon svg-icon-md svg-icon-success">
-                    <inline-svg
-                      src="media/svg/icons/Navigation/Arrow-right.svg"
-                    />
-                  </span>
-                </a>
+                <book-modal :book="item"/>
               </b-td>
             </b-tr>
           </template>
@@ -109,6 +108,8 @@
 <script>
 import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
 import Treeselect from '@riophae/vue-treeselect'
+import BookModal from './BookModal'
+import {BookStatus} from '@/core/data/enum'
 
 export default {
   mounted() {
@@ -118,9 +119,11 @@ export default {
   },
   components: {
     Treeselect,
+    BookModal
   },
   data() {
     return {
+      BookStatus,
       books: [],
       categories: [],
       selectedCategories: [],
