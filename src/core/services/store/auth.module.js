@@ -25,7 +25,7 @@ const getters = {
 
 const actions = {
   login(context, credentials) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       ApiService.post("auth/login", credentials)
         .then(({ data }) => {
           // console.log("Here what post returns", data);
@@ -33,8 +33,7 @@ const actions = {
           resolve(true);
         })
         .catch(() => {
-          context.commit("setError", 'Lütfen giriş bilgilerinizi kontrol edin!');
-          resolve();
+          reject();
         });
     });
   },
@@ -42,14 +41,14 @@ const actions = {
     context.commit("logOut");
   },
   register(context, credentials) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       ApiService.post("auth/register", credentials)
         .then(({ data }) => {
           context.commit("setUser", data);
           resolve(data);
         })
-        .catch(({ response }) => {
-          context.commit("setError", response.data.errors);
+        .catch(() => {
+          reject();
         });
     });
   },

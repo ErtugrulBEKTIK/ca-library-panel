@@ -17,7 +17,8 @@ export const locale = {
     isHour: "Please enter in the correct format.",
     isPhone: "Please enter a valid phone number.",
     integer: "Please enter a valid integer.",
-    "threeChrForSearch": "Type at least 3 characters for search.",
+    threeChrForSearch: "Type at least 3 characters for search.",
+    needToConfirmPrivacyAndPolicy: "You need to agree Privacy and Terms of Use",
   },
   common: {
     login: 'Login',
@@ -126,6 +127,7 @@ export const locale = {
       "selectPaymentMethod": "Please select a payment method!",
       "loginNotAllowed": "You have not login permission!",
       "oldPasswordWrong": "You entered old password wrong!",
+      "somethingWentWrong": "Something went wrong!",
     },
     "swal": {
       "confirmDelete": "Are you sure?",
@@ -259,7 +261,6 @@ export const locale = {
       rePasswordRequired: "Re-Password is required!",
       firstNameRequired: "First Name is required!",
       lastNameRequired: "Last Name is required!",
-      needToConfirmPrivacyAndPolicy: "You need to agree Privacy and Terms of Use",
       sureToFillFields: "Please make sure you have filled the fields correctly. "
     }
   }

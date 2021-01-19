@@ -17,7 +17,8 @@ export const locale = {
     isHour: "Lütfen doğru formatta giriniz.",
     isPhone: "Lütfen geçerli bir telefon numarası giriniz.",
     integer: "Lütfen bir tamsayı giriniz.",
-    "threeChrForSearch": "Aramak için en az 3 karakter giriniz.",
+    threeChrForSearch: "Aramak için en az 3 karakter giriniz.",
+    needToConfirmPrivacyAndPolicy: "Kullanım ve Gizlilik Koşullarını kabul etmelisiniz",
   },
   common: {
     login: 'Giriş Yap',
@@ -126,6 +127,7 @@ export const locale = {
       "selectPaymentMethod": "Ödeme yöntemini seçiniz.",
       "loginNotAllowed": "Sisteme giriş izniniz yok!",
       "oldPasswordWrong": "Girdiğiniz eski şifre yanlış!",
+      "somethingWentWrong": "İşlem esnasında hata meydana geldi!",
     },
     "swal": {
       "confirmDelete": "Emin misiniz?",
@@ -259,7 +261,6 @@ export const locale = {
       rePasswordRequired: "Şifre-tekrar gerekli!",
       firstNameRequired: "Ad gerekli!",
       lastNameRequired: "Soyad gerekli!",
-      needToConfirmPrivacyAndPolicy: "Kullanım ve Gizlilik Koşullarını kabul etmelisiniz",
       sureToFillFields: "Lütfen tüm alanları eksiksiz doldurduğunuzdan emin olun"
     }
   }
