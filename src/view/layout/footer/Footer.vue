@@ -10,8 +10,7 @@
       <div class="text-dark order-2 order-md-1">
         <span class="text-muted font-weight-bold mr-2">2021©</span>
         <a
-          href="http://keenthemes.com/metronic"
-          target="_blank"
+          href="https://ca-library.herokuapp.com/"
           class="text-dark-75 text-hover-primary"
           >{{ $t('project.myLibrary') }}</a
         >
@@ -20,14 +19,12 @@
       <!--begin::Nav-->
       <div class="nav nav-dark order-1 order-md-2">
         <a
-          href="http://keenthemes.com/metronic"
-          target="_blank"
+          href="#aboutUs"
           class="nav-link pr-3 pl-0"
           >{{ $t('project.aboutUs') }}</a
         >
         <a
-          href="http://keenthemes.com/metronic"
-          target="_blank"
+          href="#contact"
           class="nav-link pl-3 pr-0"
           >{{ $t('project.contact') }}</a
         >

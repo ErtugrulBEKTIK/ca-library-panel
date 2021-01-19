@@ -109,6 +109,7 @@ export const locale = {
       wish: 'Wish',
       profile: 'Profile',
       password: 'Password',
+      user: 'User',
       "item": "Item"
     },
     "messages": {
@@ -152,8 +153,8 @@ export const locale = {
     publishDate: "Publish Date",
     status: "Status",
     transaction: "Transaction",
-    onTheShelf: "on The Shelf",
-    outOfTheShelf: "out of the Shelf",
+    onTheShelf: "On the Shelf",
+    outOfTheShelf: "Out of the Shelf",
     details: "Details",
     comments: "Comments",
     noComments: "No Comments",
@@ -164,7 +165,7 @@ export const locale = {
     books: "Books",
     borrow: "Borrow",
     borrowConfirm: "Are you sure you want to borrow the book?",
-    addToWishlist: "Add to Wishlist",
+    addToWishlist: "Add to Wish List",
     member: "Member",
     profileOverview: "Profile Overview",
     changePassword: "Change Password",

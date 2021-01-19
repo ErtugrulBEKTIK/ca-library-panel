@@ -12,8 +12,8 @@ export const toolMixin = {
         text: this.$t('notification.swal.confirmDelete'),
         icon: "error",
         confirmButtonColor: "red",
-        confirmButtonText: "Sil",
-        cancelButtonText: 'İptal',
+        confirmButtonText: this.$t('common.delete'),
+        cancelButtonText: this.$t('common.cancel'),
         showCancelButton: true,
         reverseButtons: true,
         heightAuto: false

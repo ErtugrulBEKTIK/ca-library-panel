@@ -4,8 +4,6 @@
     <KTHeaderMobile></KTHeaderMobile>
     <!-- end:: Header Mobile -->
 
-    <Loader v-if="false" v-bind:logo="loaderLogo"></Loader>
-
     <div class="d-flex flex-row flex-column-fluid page">
       <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
         <!-- begin:: Header -->
@@ -51,7 +49,6 @@
       </div>
     </div>
 
-    <KTStickyToolbar v-if="toolbarDisplay"></KTStickyToolbar>
     <KTScrollTop></KTScrollTop>
   </div>
 </template>
@@ -64,9 +61,7 @@ import KTHeaderMobile from "@/view/layout/header/HeaderMobile.vue";
 import KTSubheader from "@/view/layout/subheader/Subheader.vue";
 import KTFooter from "@/view/layout/footer/Footer.vue";
 import HtmlClass from "@/core/services/htmlclass.service";
-import KTStickyToolbar from "@/view/layout/extras/StickyToolbar.vue";
 import KTScrollTop from "@/view/layout/extras/ScrollTop";
-import Loader from "@/view/content/Loader.vue";
 import {
   ADD_BODY_CLASSNAME,
   REMOVE_BODY_CLASSNAME
@@ -80,9 +75,7 @@ export default {
     KTHeaderMobile,
     KTSubheader,
     KTFooter,
-    KTStickyToolbar,
     KTScrollTop,
-    Loader
   },
   beforeMount() {
     // show page loading

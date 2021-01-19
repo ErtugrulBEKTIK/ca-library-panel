@@ -109,6 +109,7 @@
                       v-bind="attrs"
                       v-on="listeners"
                       type="password"
+                      @keypress.enter="submitLogin"
                       class="form-control-lg form-control-solid h-auto py-7 px-6 rounded-lg"
                       v-model="loginForm.password"
                     />
@@ -387,7 +388,7 @@ export default {
         this.submitting = true;
         this.$store.dispatch(LOGOUT);
 
-        await this.$store.dispatch(REGISTER, this.loginForm);
+        await this.$store.dispatch(REGISTER, this.registerForm);
         this.$router.push({ name: "home" });
 
       }catch (e) {

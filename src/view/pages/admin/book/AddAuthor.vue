@@ -132,8 +132,12 @@ export default {
 
   },
   watch: {
-    value(val){
-      this.selectedAuthors = val
+    value: {
+      deep: true,
+      handler(val){
+        this.selectedAuthors = val
+      },
+      immediate: true
     }
   }
 };

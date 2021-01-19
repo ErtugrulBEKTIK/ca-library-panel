@@ -132,8 +132,12 @@ export default {
 
   },
   watch: {
-    value(val){
-      this.selectedCategories = val
+    value: {
+      deep: true,
+      handler(val){
+        this.selectedCategories = val
+      },
+      immediate: true
     }
   }
 };

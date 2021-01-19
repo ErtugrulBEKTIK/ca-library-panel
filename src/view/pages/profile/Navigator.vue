@@ -12,7 +12,11 @@
           <a class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
             {{ currentUser.firstName }} {{ currentUser.lastName }}
           </a>
-          <div class="text-muted">{{ $t('project.member') }}</div>
+          <div class="text-muted">
+            <span v-if="currentUser.roleId === Roles.ADMIN">{{ $t('project.admin') }}</span>
+            <span v-if="currentUser.roleId === Roles.EDITOR">{{ $t('project.editor') }}</span>
+            <span v-if="currentUser.roleId === Roles.BASIC_USER">{{ $t('project.member') }}</span>
+          </div>
           <div class="mt-2">
             <a class="text-muted text-hover-primary">
               {{ currentUser.email }}
@@ -119,9 +123,15 @@
 
 <script>
   import {mapGetters} from "vuex";
+  import {Roles} from '@/core/data/enum'
 
   export default {
     name: "Navigator",
+    data() {
+      return {
+        Roles
+      };
+    },
     methods: {
     },
     computed: {

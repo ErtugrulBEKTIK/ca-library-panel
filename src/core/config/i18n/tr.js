@@ -109,6 +109,7 @@ export const locale = {
       wish: 'İstek',
       profile: 'Profil',
       password: 'Şifre',
+      user: 'Kullanıcı',
       "item": "Ürün"
     },
     "messages": {
@@ -145,7 +146,7 @@ export const locale = {
     search: "Ara",
     title: "Başlık",
     author: "Yazar",
-    authors: "yazarlar",
+    authors: "Yazarlar",
     category: "Karegori",
     categories: "Kategoriler",
     publisher: "Yayıncı",

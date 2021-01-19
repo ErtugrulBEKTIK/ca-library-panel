@@ -155,7 +155,8 @@
           firstName: this.currentUser.firstName,
           lastName: this.currentUser.lastName,
           email: this.currentUser.email,
-          avatar: this.currentUser.avatar
+          avatar: this.currentUser.avatar,
+          roleId: this.currentUser.roleId
         };
         this.$v.form.$reset();
       },
