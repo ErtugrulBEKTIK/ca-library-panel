@@ -6,9 +6,9 @@
 
     <KTDropdownLanguage></KTDropdownLanguage>
     <!--begin: User Bar -->
-    <KTQuickUser v-show="isAuthenticated"></KTQuickUser>
+    <KTQuickUser v-if="isAuthenticated"></KTQuickUser>
     <!--end: User Bar -->
-    <div class="topbar-item" v-show="!isAuthenticated">
+    <div class="topbar-item" v-if="!isAuthenticated">
       <router-link to="/login">
         <div
           class="btn btn-icon btn-hover-transparent-white d-flex align-items-center btn-lg px-md-2 w-md-auto"

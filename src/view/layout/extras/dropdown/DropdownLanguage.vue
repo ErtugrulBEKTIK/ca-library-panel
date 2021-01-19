@@ -2,6 +2,7 @@
   <b-dropdown
     size="sm"
     variant="link"
+    ref="lngDropdown"
     toggle-class="topbar-item text-decoration-none"
     no-caret
     right
@@ -28,7 +29,7 @@
               <a
                 href="#"
                 class="navi-link"
-                @click="selectedLanguage(item.lang)"
+                @click="selectLanguage(item.lang)"
               >
               <span class="symbol symbol-20 mr-3">
                 <img :src="item.flag" alt="" />
@@ -55,9 +56,10 @@ export default {
     };
   },
   methods: {
-    selectedLanguage(lang) {
+    selectLanguage(lang) {
       this.$i18n.locale = lang;
       i18nService.setActiveLanguage(lang);
+      this.$refs.lngDropdown.hide()
     },
     isActiveLanguage(current) {
       return this.activeLanguage === current;

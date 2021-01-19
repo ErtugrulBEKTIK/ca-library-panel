@@ -6,12 +6,17 @@
       </span>
     </a>
     <b-modal :title="$t('project.toComment')" v-model="modal" centered @close="onClose" no-close-on-backdrop no-close-on-esc>
-      <form-group xs="12" no-label no-margin>
-        <b-form-rating v-model="form.star" variant="warning"/>
-      </form-group>
-      <form-group xs="12">
-        <b-form-textarea :placeholder="$t('project.toComment')" rows="5" v-model="form.content" />
-      </form-group>
+      <div v-if="!loading">
+        <form-group xs="12" no-label no-margin>
+          <b-form-rating v-model="form.star" variant="warning"/>
+        </form-group>
+        <form-group xs="12">
+          <b-form-textarea :placeholder="$t('project.toComment')" rows="5" v-model="form.content" />
+        </form-group>
+      </div>
+      <div class="text-center" v-if="loading">
+        <b-spinner variant="primary" />
+      </div>
       <template slot="modal-footer">
         <b-button variant="light" @click="onClose">
           {{ $t("common.cancel") }}
@@ -19,9 +24,9 @@
         <b-button
           variant="primary"
           @click="submit"
-          :disabled="saved"
+          :disabled="saved || submitting"
           class="mr-1">
-          {{ $t("common.save") }}
+          {{ $t("common.save") }} <b-spinner small v-if="submitting" />
         </b-button>
       </template>
     </b-modal>
@@ -41,6 +46,8 @@
           star: 0,
           content: ''
         },
+        loading: true,
+        submitting: false,
         saved: false,
         isNew: true
       }
@@ -48,6 +55,7 @@
     methods: {
       async getComment() {
         try {
+          this.loading = true;
           const { data } = await this.axios.get("profile/comments", {
             params: {
               bookId: this.booking.bookId
@@ -70,11 +78,13 @@
           }, 200);
         } catch (e) {
           console.log(e);
+        } finally {
+          this.loading = false;
         }
       },
       async submit(){
         try {
-
+          this.submitting = true;
           const method = this.isNew ? 'post' : 'patch';
           await this.axios[method]("profile/comments", {
             bookId: this.booking.bookId,
@@ -86,8 +96,9 @@
 
         }catch (e) {
           this.toast({ type: "danger", message: "createError", item: "book" });
-
           console.log(e);
+        } finally {
+          this.submitting = false;
         }
       },
       onClose(bvModalEvt) {

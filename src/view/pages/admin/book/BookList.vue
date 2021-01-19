@@ -31,8 +31,8 @@
             </b-tr>
           </b-thead>
           <b-tbody>
-            <template v-for="(item, i) in books">
-              <b-tr :key="i">
+            <template v-if="!loading">
+              <b-tr v-for="(item, i) in books" :key="i">
                 <b-td>{{ item.title }}</b-td>
                 <b-td>{{ item.authors.map(a => a.fullName).join(', ') }}</b-td>
                 <b-td>{{ item.categories.map(c => c.name).join(', ') }}</b-td>
@@ -55,9 +55,16 @@
                 </b-td>
               </b-tr>
             </template>
+            <tr v-if="books.length === 0 && !loading" class="text-center">
+              <td colspan="8">{{ $t('project.noRecord') }}</td>
+            </tr>
+            <tr v-if="loading" class="text-center">
+              <td colspan="8"><b-spinner variant="primary" /></td>
+            </tr>
           </b-tbody>
         </b-table-simple>
         <b-pagination
+          v-if="pageSize < totalRows"
           v-model="pageNumber"
           :total-rows="totalRows"
           :per-page="pageSize"
@@ -88,13 +95,14 @@ export default {
       pageSize: 10,
       pageNumber: 1,
       totalRows: null,
+      loading: true,
       search: '',
     };
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: this.$t('project.adminPanel') },
-      { title: this.$t('project.bookTransactions') }
+      { title: 'project.adminPanel' },
+      { title: 'project.bookTransactions' }
     ]);
 
     this.getBooks();
@@ -102,6 +110,7 @@ export default {
   methods: {
     async getBooks() {
       try {
+        this.loading = true;
         const { data } = await this.axios.get("admin/books", {
           params: { ...this.requestQuery }
         });
@@ -109,6 +118,8 @@ export default {
         this.totalRows = data.count;
       } catch (e) {
         console.log(e);
+      } finally {
+        this.loading = false;
       }
     },
 

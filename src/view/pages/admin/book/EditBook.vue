@@ -18,7 +18,7 @@
       no-close-on-esc
       no-close-on-backdrop
     >
-      <form-wrapper :validator="$v.form" class="av-tooltip tooltip-right-top">
+      <form-wrapper :validator="$v.form" v-if="!loading" class="av-tooltip tooltip-right-top">
         <b-row>
           <form-group name="title" md="6" :label="$t('project.bookName')">
             <b-input
@@ -96,17 +96,20 @@
           </form-group>
         </b-row>
       </form-wrapper>
+      <div class="text-center" v-if="loading">
+        <b-spinner variant="primary" />
+      </div>
       <template slot="modal-footer">
-        <b-button variant="light" @click="onClose">{{
-          $t("common.cancel")
-        }}</b-button>
+        <b-button variant="light" @click="onClose">
+          {{ $t("common.cancel") }}
+        </b-button>
         <b-button
           variant="primary"
           @click="submitForm"
-          :disabled="$v.$anyError || saved"
-          class="mr-1"
-          >{{ $t("common.save") }}</b-button
-        >
+          :disabled="$v.$anyError || saved || submitting"
+          class="mr-1">
+          {{ $t("common.save") }} <b-spinner small v-if="submitting" />
+        </b-button>
       </template>
     </b-modal>
   </div>
@@ -157,6 +160,8 @@ export default {
         authors: [],
         categories: []
       },
+      loading: true,
+      submitting: false,
       saved: true
     };
   },
@@ -177,6 +182,7 @@ export default {
     },
     async getBook() {
       try {
+        this.loading = true;
         const { data } = await this.axios.get("admin/books/" + this.bookId);
         this.form = data;
         setTimeout(() => {
@@ -184,10 +190,13 @@ export default {
         }, 200);
       } catch (e) {
         console.log(e);
+      } finally {
+        this.loading = false;
       }
     },
     async submitForm() {
       try {
+        this.submitting = true;
         this.$v.$touch();
         if (this.$v.$anyError) {
           this.toast({ type: 'danger', message: 'validationError' });
@@ -203,6 +212,8 @@ export default {
       } catch (e) {
         this.toast({ type: "danger", message: "updateError", item: "book" });
         console.log(e);
+      } finally {
+        this.submitting = false;
       }
     }
   },

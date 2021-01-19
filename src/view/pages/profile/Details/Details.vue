@@ -140,8 +140,8 @@
     mounted() {
 
       this.$store.dispatch(SET_BREADCRUMB, [
-        { title: this.$t('project.profile') },
-        { title: this.$t('project.profileOverview') }
+        { title: 'project.profile' },
+        { title: 'project.profileOverview' }
       ]);
 
       this.reset()

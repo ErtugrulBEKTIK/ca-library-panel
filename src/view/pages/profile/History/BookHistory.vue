@@ -23,8 +23,8 @@
             </tr>
           </thead>
           <tbody>
-          <template v-for="(item, i) in bookings">
-            <tr :key="i">
+          <template v-if="!loading">
+            <tr v-for="(item, i) in bookings" :key="i">
               <td class="pl-0">
                  <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                    {{ item.bookTitle }}
@@ -71,13 +71,17 @@
               </td>
             </tr>
           </template>
-          <tr v-if="bookings.length === 0" class="text-center">
+          <tr v-if="bookings.length === 0 && !loading" class="text-center">
             <td colspan="5">{{ $t('project.noRecord') }}</td>
+          </tr>
+          <tr v-if="loading" class="text-center">
+            <td colspan="5"><b-spinner variant="primary" /></td>
           </tr>
           </tbody>
         </table>
       </div>
       <b-pagination
+        v-if="pageSize < totalRows"
         v-model="pageNumber"
         :total-rows="totalRows"
         :per-page="pageSize"
@@ -102,6 +106,7 @@
       return {
         BookingStatus,
         modal: false,
+        loading: true,
         bookings: [],
         pageSize: 10,
         pageNumber: 1,
@@ -110,8 +115,8 @@
     },
     mounted() {
       this.$store.dispatch(SET_BREADCRUMB, [
-        { title: this.$t('project.profile') },
-        { title: this.$t('project.bookHistory') }
+        { title: 'project.profile' },
+        { title: 'project.bookHistory' }
       ]);
 
       this.getBookings()
@@ -120,6 +125,7 @@
       ...mapMutations(["setUser"]),
       async getBookings() {
         try {
+          this.loading = true;
           const { data } = await this.axios.get("profile/bookings", {
             params: { ...this.requestQuery }
           });
@@ -127,6 +133,8 @@
           this.totalRows = data.count;
         } catch (e) {
           console.log(e);
+        } finally {
+          this.loading = false;
         }
       },
       async returnBook(bookingId) {
@@ -188,6 +196,12 @@
           pageSize: this.pageSize,
           pageNumber: this.pageNumber
         };
+      }
+    },
+    watch: {
+      requestQuery: {
+        handler: "getBookings",
+        deep: true
       }
     }
   };

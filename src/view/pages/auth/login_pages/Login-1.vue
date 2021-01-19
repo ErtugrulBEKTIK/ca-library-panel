@@ -38,17 +38,21 @@
       <!--begin::Aside-->
       <!--begin::Content-->
       <div
-        class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative overflow-hidden p-7 mx-auto"
+        class="login-content flex-row-fluid d-flex flex-column justify-content-center position-relative p-7 mx-auto"
       >
-        <router-link to="/home" style="align-self: flex-end;">
-          <span class="svg-icon svg-icon-4x svg-icon-warning">
-            <inline-svg
-              src="media/svg/icons/Navigation/Angle-double-left.svg"
-            />
-          </span>
-        </router-link>
+        <div class="d-flex flex-row justify-content-between align-items-center">
+          <router-link to="/home">
+            <span class="svg-icon svg-icon-4x svg-icon-warning">
+              <inline-svg
+                src="media/svg/icons/Navigation/Angle-double-left.svg"
+              />
+            </span>
+          </router-link>
+          <KTDropdownLanguage />
+        </div>
 
-        <div class="d-flex flex-column-fluid flex-center">
+
+        <div class="d-flex flex-column-fluid flex-center overflow-hidden">
           <!--begin::Signin-->
           <div class="login-form login-signin">
             <form
@@ -314,8 +318,12 @@ import KTUtil from "@/assets/js/components/util";
 import { mapGetters, mapState } from "vuex";
 import { LOGIN, LOGOUT, REGISTER } from "@/core/services/store/auth.module";
 import Swal from "sweetalert2";
+import KTDropdownLanguage from "@/view/layout/extras/dropdown/DropdownLanguage";
 
 export default {
+  components: {
+    KTDropdownLanguage,
+  },
   name: "login-1",
   data() {
     return {

@@ -83,7 +83,7 @@
       :class="{ 'menu-item-active': hasActiveChildren('/custom') }"
     >
       <a href="#" class="menu-link menu-toggle">
-        <span class="menu-text"> {{ $t('project.admin') }} </span>
+        <span class="menu-text"> {{ $t('project.administration') }} </span>
       </a>
       <div class="menu-submenu menu-submenu-classic">
         <ul class="menu-subnav">

@@ -14,8 +14,8 @@
             </b-tr>
           </b-thead>
           <b-tbody>
-            <template v-for="(item, i) in categories">
-              <b-tr :key="i">
+            <template v-if="!loading">
+              <b-tr v-for="(item, i) in categories" :key="i">
                 <b-td>
                   {{ item.name }}
                 </b-td>
@@ -37,13 +37,19 @@
                 </b-td>
               </b-tr>
             </template>
+            <tr v-if="categories.length === 0 && !loading" class="text-center">
+              <td colspan="2">{{ $t('project.noRecord') }}</td>
+            </tr>
+            <tr v-if="loading" class="text-center">
+              <td colspan="2"><b-spinner variant="primary" /></td>
+            </tr>
           </b-tbody>
         </b-table-simple>
         <b-pagination
+          v-if="pageSize < totalRows"
           v-model="pageNumber"
           :total-rows="totalRows"
           :per-page="pageSize"
-          aria-controls="my-table"
         ></b-pagination>
       </b-card>
     </b-col>
@@ -91,6 +97,7 @@ export default {
         name: "",
       },
       categories: [],
+      loading: true,
       pageSize: 10,
       pageNumber: 1,
       totalRows: null,
@@ -98,8 +105,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: this.$t('project.adminPanel') },
-      { title: this.$t('project.categoryTransactions') }
+      { title: 'project.adminPanel' },
+      { title: 'project.categoryTransactions' }
     ]);
 
     this.getCategories();
@@ -107,6 +114,7 @@ export default {
   methods: {
     async getCategories() {
       try {
+        this.loading = true;
         const { data } = await this.axios.get("admin/categories", {
           params: { ...this.requestQuery },
         });
@@ -114,6 +122,8 @@ export default {
         this.totalRows = data.count;
       } catch (e) {
         console.log(e);
+      } finally {
+        this.loading = false;
       }
     },
 

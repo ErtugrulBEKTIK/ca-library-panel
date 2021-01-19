@@ -15,8 +15,8 @@
             </b-tr>
           </b-thead>
           <b-tbody>
-            <template v-for="(item, i) in authors">
-              <b-tr :key="i">
+            <template v-if="!loading">
+              <b-tr v-for="(item, i) in authors" :key="i">
                 <b-td>
                   {{ item.fullName }}
                 </b-td>
@@ -38,13 +38,19 @@
                 </b-td>
               </b-tr>
             </template>
+            <tr v-if="authors.length === 0 && !loading" class="text-center">
+              <td colspan="3">{{ $t('project.noRecord') }}</td>
+            </tr>
+            <tr v-if="loading" class="text-center">
+              <td colspan="3"><b-spinner variant="primary" /></td>
+            </tr>
           </b-tbody>
         </b-table-simple>
         <b-pagination
+          v-if="pageSize < totalRows"
           v-model="pageNumber"
           :total-rows="totalRows"
           :per-page="pageSize"
-          aria-controls="my-table"
         ></b-pagination>
       </b-card>
     </b-col>
@@ -103,6 +109,7 @@ export default {
         description: ""
       },
       authors: [],
+      loading: true,
       pageSize: 10,
       pageNumber: 1,
       totalRows: null
@@ -110,8 +117,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: this.$t('project.adminPanel') },
-      { title: this.$t('project.authorTransactions') }
+      { title: 'project.adminPanel' },
+      { title: 'project.authorTransactions' }
     ]);
 
     this.getAuthors();
@@ -119,6 +126,7 @@ export default {
   methods: {
     async getAuthors() {
       try {
+        this.loading = true;
         const { data } = await this.axios.get("admin/authors", {
           params: { ...this.requestQuery }
         });
@@ -126,6 +134,8 @@ export default {
         this.totalRows = data.count;
       } catch (e) {
         console.log(e);
+      } finally {
+        this.loading = false;
       }
     },
 

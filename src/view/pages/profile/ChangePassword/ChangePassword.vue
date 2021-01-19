@@ -99,8 +99,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: this.$t('project.profile') },
-      { title: this.$t('project.changePassword') }
+      { title: 'project.profile' },
+      { title: 'project.changePassword' }
     ]);
   },
   methods: {

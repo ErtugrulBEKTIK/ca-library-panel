@@ -10,7 +10,7 @@
     >
       <div class="d-flex align-items-center flex-wrap mr-1">
         <h5 class="text-dark font-weight-bold my-2 mr-5">
-          {{ title }}
+          {{ $t(title) }}
         </h5>
         <ul
           class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2"
@@ -29,10 +29,10 @@
                 :to="breadcrumb.route"
                 class="text-muted"
               >
-                {{ breadcrumb.title }}
+                {{ $t(breadcrumb.title) }}
               </router-link>
               <span class="text-muted" :key="i" v-if="!breadcrumb.route">
-                {{ breadcrumb.title }}
+                {{ $t(breadcrumb.title) }}
               </span>
             </li>
           </template>

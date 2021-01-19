@@ -21,8 +21,8 @@
             </tr>
           </thead>
           <tbody>
-          <template v-for="(item, i) in wishes">
-            <tr :key="i">
+          <template v-if="!loading">
+            <tr v-for="(item, i) in wishes" :key="i">
               <td class="pl-0">
                  <span class="text-dark-75 font-weight-bolder d-block font-size-lg">
                    {{ item.bookTitle }}
@@ -65,13 +65,17 @@
               </td>
             </tr>
           </template>
-          <tr v-if="wishes.length === 0" class="text-center">
+          <tr v-if="wishes.length === 0 && !loading" class="text-center">
             <td colspan="3">{{ $t('project.noRecord') }}</td>
+          </tr>
+          <tr v-if="loading" class="text-center">
+            <td colspan="3"><b-spinner variant="primary" /></td>
           </tr>
           </tbody>
         </table>
       </div>
       <b-pagination
+        v-if="pageSize < totalRows"
         v-model="pageNumber"
         :total-rows="totalRows"
         :per-page="pageSize"
@@ -93,6 +97,7 @@
       return {
         BookStatus,
         modal: false,
+        loading: true,
         wishes: [],
         pageSize: 10,
         pageNumber: 1,
@@ -101,8 +106,8 @@
     },
     mounted() {
       this.$store.dispatch(SET_BREADCRUMB, [
-        { title: this.$t('project.profile') },
-        { title: this.$t('project.wishList') }
+        { title: 'project.profile' },
+        { title: 'project.wishList' }
       ]);
 
       this.getWishes()
@@ -111,6 +116,7 @@
       ...mapMutations(["setUser"]),
       async getWishes() {
         try {
+          this.loading = true;
           const { data } = await this.axios.get("profile/wishes", {
             params: { ...this.requestQuery }
           });
@@ -118,6 +124,8 @@
           this.totalRows = data.count;
         } catch (e) {
           console.log(e);
+        }finally {
+          this.loading = false;
         }
       },
       async removeWish(wishId) {
@@ -212,6 +220,12 @@
           pageSize: this.pageSize,
           pageNumber: this.pageNumber
         };
+      }
+    },
+    watch: {
+      requestQuery: {
+        handler: "getWishes",
+        deep: true
       }
     }
   };

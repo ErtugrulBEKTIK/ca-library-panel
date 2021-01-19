@@ -16,8 +16,8 @@
             </b-tr>
           </b-thead>
           <b-tbody>
-            <template v-for="(item, i) in admins">
-              <b-tr :key="i">
+            <template v-if="!adminLoading">
+              <b-tr v-for="(item, i) in admins" :key="i">
                 <b-td>
                   {{ item.fullName }}
                 </b-td>
@@ -42,6 +42,12 @@
                 </b-td>
               </b-tr>
             </template>
+            <tr v-if="admins.length === 0 && !adminLoading" class="text-center">
+              <td colspan="4">{{ $t('project.noRecord') }}</td>
+            </tr>
+            <tr v-if="adminLoading" class="text-center">
+              <td colspan="4"><b-spinner variant="primary" /></td>
+            </tr>
           </b-tbody>
         </b-table-simple>
       </b-card>
@@ -59,8 +65,8 @@
             </b-tr>
           </b-thead>
           <b-tbody>
-            <template v-for="(item, i) in users">
-              <b-tr :key="i">
+            <template v-if="!userLoading">
+              <b-tr v-for="(item, i) in users" :key="i">
                 <b-td>
                   {{ item.fullName }}
                 </b-td>
@@ -82,13 +88,19 @@
                 </b-td>
               </b-tr>
             </template>
+            <tr v-if="users.length === 0 && !userLoading" class="text-center">
+              <td colspan="3">{{ $t('project.noRecord') }}</td>
+            </tr>
+            <tr v-if="userLoading" class="text-center">
+              <td colspan="3"><b-spinner variant="primary" /></td>
+            </tr>
           </b-tbody>
         </b-table-simple>
         <b-pagination
+          v-if="pageSize < totalRows"
           v-model="pageNumber"
           :total-rows="totalRows"
           :per-page="pageSize"
-          aria-controls="my-table"
         ></b-pagination>
       </b-card>
     </b-col>
@@ -216,6 +228,8 @@ export default {
       },
       admins: [],
       users: [],
+      userLoading: true,
+      adminLoading: true,
       pageSize: 10,
       pageNumber: 1,
       totalRows: null
@@ -223,8 +237,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: this.$t('project.adminPanel') },
-      { title: this.$t('project.userTransactions') }
+      { title: 'project.adminPanel' },
+      { title: 'project.userTransactions' }
     ]);
 
     this.getData();
@@ -236,14 +250,18 @@ export default {
     },
     async getAdmins() {
       try {
+        this.adminLoading = true;
         const { data } = await this.axios.get("admin/admin-list");
         this.admins = data;
       } catch (e) {
         console.log(e);
+      } finally {
+        this.adminLoading = false;
       }
     },
     async getUsers() {
       try {
+        this.userLoading = true;
         const { data } = await this.axios.get("admin/users", {
           params: { ...this.requestQuery }
         });
@@ -251,6 +269,8 @@ export default {
         this.totalRows = data.count;
       } catch (e) {
         console.log(e);
+      } finally {
+        this.userLoading = false;
       }
     },
 
@@ -307,6 +327,7 @@ export default {
   },
   watch: {
     requestQuery() {
+      this.getAdmins();
       this.getUsers();
     }
   }

@@ -15,8 +15,8 @@
         </b-tr>
       </b-thead>
       <b-tbody>
-        <template v-for="(item, i) in comments">
-          <b-tr :key="i">
+        <template v-if="!loading">
+          <b-tr v-for="(item, i) in comments" :key="i">
             <b-td>{{ item.user }}</b-td>
             <b-td>{{ item.book }}</b-td>
             <b-td>{{ item.content }}</b-td>
@@ -57,8 +57,11 @@
             </b-td>
           </b-tr>
         </template>
-        <tr v-if="comments.length === 0" class="text-center">
+        <tr v-if="comments.length === 0 && !loading" class="text-center">
           <td colspan="5">{{ $t('project.noRecord') }}</td>
+        </tr>
+        <tr v-if="loading" class="text-center">
+          <td colspan="35"><b-spinner variant="primary" /></td>
         </tr>
       </b-tbody>
     </b-table-simple>
@@ -67,7 +70,6 @@
       v-model="pageNumber"
       :total-rows="totalRows"
       :per-page="pageSize"
-      aria-controls="my-table"
     ></b-pagination>
   </div>
 </template>
@@ -79,6 +81,7 @@ export default {
   data() {
     return {
       comments: [],
+      loading: true,
       pageSize: 10,
       pageNumber: 1,
       totalRows: null
@@ -93,6 +96,7 @@ export default {
   methods: {
     async getComments() {
       try {
+        this.loading = true;
         const { data } = await this.axios.get("admin/comments", {
           params: {
             ...this.requestQuery,
@@ -102,6 +106,8 @@ export default {
         this.comments = data.rows;
       } catch (e) {
         console.log(e);
+      } finally {
+        this.loading = false;
       }
     },
 

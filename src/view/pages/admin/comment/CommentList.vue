@@ -27,8 +27,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: this.$t('project.adminPanel') },
-      { title: this.$t('project.commentTransactions') }
+      { title: 'project.adminPanel' },
+      { title: 'project.commentTransactions' }
     ]);
 
 

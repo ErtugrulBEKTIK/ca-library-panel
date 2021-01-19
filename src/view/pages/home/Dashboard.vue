@@ -53,8 +53,8 @@
           </b-tr>
         </b-thead>
         <b-tbody>
-          <template v-for="(item, i) in books">
-            <b-tr v-bind:key="i">
+          <template v-if="!loading">
+            <b-tr v-for="(item, i) in books" :key="i">
               <b-td>
                 <span
                   class="font-weight-bolder text-hover-primary font-size-lg"
@@ -99,6 +99,11 @@
               </b-td>
             </b-tr>
           </template>
+          <b-tr v-if="loading" class="text-center">
+            <b-td colspan="7">
+              <b-spinner variant="primary" />
+            </b-td>
+          </b-tr>
         </b-tbody>
       </b-table-simple>
     </b-card>
@@ -113,7 +118,7 @@ import {BookStatus} from '@/core/data/enum'
 
 export default {
   mounted() {
-    this.$store.dispatch(SET_BREADCRUMB, [{ title: "Kitap Listesi" }]);
+    this.$store.dispatch(SET_BREADCRUMB, [{ title: "project.bookList" }]);
     this.getBooks();
     this.getCategories()
   },
@@ -128,6 +133,7 @@ export default {
       categories: [],
       selectedCategories: [],
       search: '',
+      loading: true,
       pageSize: 10,
       pageNumber: 1,
       totalRows: null,
@@ -136,11 +142,14 @@ export default {
   methods: {
     async getBooks() {
       try {
+        this.loading = true;
         const { data } = await this.axios.post("public/books", { ...this.requestQuery });
         this.books = data.rows;
         this.totalRows = data.count;
       } catch (e) {
         console.log(e);
+      } finally {
+        this.loading = false
       }
     },
     async getCategories() {
@@ -161,12 +170,23 @@ export default {
   computed: {
     requestQuery() {
       return {
-        pageSize: this.pageSize,
-        pageNumber: this.pageNumber,
+        ...this.pagination,
         search: this.search,
         categories: this.selectedCategories
       };
-    }
+    },
+    pagination() {
+      return {
+        pageSize: this.pageSize,
+        pageNumber: this.pageNumber
+      };
+    },
   },
+  watch: {
+    pagination: {
+      handler: "getBooks",
+      deep: true
+    }
+  }
 };
 </script>
