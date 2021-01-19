@@ -3,10 +3,10 @@
     <div class="card-header py-3">
       <div class="card-title align-items-start flex-column">
         <h3 class="card-label font-weight-bolder text-dark">
-          Kişisel Bilgiler
+          {{ $t('project.personalInformation') }}
         </h3>
         <span class="text-muted font-weight-bold font-size-sm mt-1">
-          Kişisel bilgilerinizi güncelleyebilrsiniz.
+          {{ $t('project.canUpdatePersonalInformation') }}
         </span>
       </div>
       <div class="card-toolbar">
@@ -16,10 +16,10 @@
           @click="submit()"
           ref="kt_save_changes"
         >
-          Save Changes
+          {{ $t('project.saveChanges') }}
         </button>
         <button type="reset" class="btn btn-secondary" @click="reset()">
-          Cancel
+          {{ $t('project.cancel') }}
         </button>
       </div>
     </div>
@@ -27,7 +27,7 @@
       <div class="card-body">
         <div class="form-group row">
           <label class="col-xl-3 col-lg-3 col-form-label text-right">
-            Avatar
+            {{ $t('project.avatar') }}
           </label>
           <div class="col-lg-9 col-xl-6 mb-5">
             <div class="image-input image-input-outline" id="kt_profile_avatar">
@@ -47,7 +47,7 @@
         </div>
         <div class="form-group row">
           <label class="col-xl-3 col-lg-3 col-form-label text-right">
-            Ad
+            {{ $t('project.firstName') }}
           </label>
           <form-group name="firstName" lg="9" xl="6" no-label no-margin>
             <b-input
@@ -61,7 +61,7 @@
         </div>
         <div class="form-group row">
           <label class="col-xl-3 col-lg-3 col-form-label text-right">
-            Soyad
+            {{ $t('project.lastName') }}
           </label>
           <form-group name="lastName" lg="9" xl="6" no-label no-margin>
             <b-input
@@ -75,7 +75,7 @@
         </div>
         <div class="form-group row">
           <label class="col-xl-3 col-lg-3 col-form-label text-right">
-            Email Address
+            {{ $t('project.email') }}
           </label>
           <form-group name="email" lg="9" xl="6" no-label no-margin>
             <div class="input-group input-group-lg input-group-solid" slot-scope="{ attrs, listeners }">
@@ -95,7 +95,7 @@
         </div>
       </div>
     </form-wrapper>
-    <b-modal v-model="modal" title="Avatar Seçebilirsiniz" hide-footer size="lg" scrollable>
+    <b-modal v-model="modal" :title="$t('project.selectAvatar')" hide-footer size="lg" scrollable>
       <b-row>
         <b-col md="2" v-for="(avatar, i) in avatars" :key="i" @click="selectAvatar(avatar)">
           <div class="image-input image-input-outline">
@@ -140,8 +140,8 @@
     mounted() {
 
       this.$store.dispatch(SET_BREADCRUMB, [
-        { title: "Profil" },
-        { title: "Detay" }
+        { title: this.$t('project.profile') },
+        { title: this.$t('project.profileOverview') }
       ]);
 
       this.reset()

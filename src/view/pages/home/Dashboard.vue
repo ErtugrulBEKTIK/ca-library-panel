@@ -11,7 +11,7 @@
             :max-height="150"
             :noOptionsText="$t('common.treeSelectNoOption')"
             :limitText="count => $t('common.treeSelectLimit', {count})"
-            placeholder=""
+            :placeholder="$t('project.selectCategory')"
             v-model="selectedCategories"
             :options="categories"
             :normalizer="normalizer"
@@ -19,7 +19,7 @@
         </b-col>
         <b-col md="5">
           <b-input-group>
-            <b-input placeholder="Kitap Adı Ara" v-model="search" />
+            <b-input :placeholder="$t('project.searchBookName')" v-model="search" />
             <template #append>
               <b-input-group-text class="p-1 pl-3 pr-3">
                 <inline-svg src="media/svg/icons/General/Search.svg" />
@@ -29,7 +29,7 @@
         </b-col>
         <b-col md="3">
           <b-button block @click="getBooks">
-            Ara
+            {{ $t('project.search') }}
           </b-button>
         </b-col>
       </b-row>
@@ -43,13 +43,13 @@
       >
         <b-thead>
           <b-tr>
-            <b-th style="width: 200px">Başlık</b-th>
-            <b-th style="min-width: 150px">Yazar</b-th>
-            <b-th style="min-width: 150px">Kategori</b-th>
-            <b-th style="min-width: 140px">Basım Evi</b-th>
-            <b-th style="min-width: 110px">Basım Yılı</b-th>
-            <b-th style="min-width: 110px">Durumu</b-th>
-            <b-th style="min-width: 50px">İşlem</b-th>
+            <b-th style="width: 200px">{{ $t('project.title') }}</b-th>
+            <b-th style="min-width: 150px">{{ $t('project.author') }}</b-th>
+            <b-th style="min-width: 150px">{{ $t('project.category') }}</b-th>
+            <b-th style="min-width: 140px">{{ $t('project.publisher') }}</b-th>
+            <b-th style="min-width: 110px">{{ $t('project.publishDate') }}</b-th>
+            <b-th style="min-width: 110px">{{ $t('project.status') }}</b-th>
+            <b-th style="min-width: 50px">{{ $t('project.transaction') }}</b-th>
           </b-tr>
         </b-thead>
         <b-tbody>
@@ -86,12 +86,12 @@
                 <span
                   v-if="item.status === BookStatus.AVAILABLE"
                   class="label label-lg label-inline label-light-success">
-                  Rafta
+                  {{ $t('project.onTheShelf') }}
                 </span>
                 <span
                   v-if="item.status === BookStatus.BORROWED"
                   class="label label-lg label-inline label-light-danger">
-                  Dışarıda
+                  {{ $t('project.outOfTheShelf') }}
                 </span>
               </b-td>
               <b-td class="pr-0">

@@ -5,12 +5,12 @@
         <inline-svg src="/media/svg/icons/Communication/Chat6.svg"/>
       </span>
     </a>
-    <b-modal title="Yorum Yap" v-model="modal" centered @close="onClose" no-close-on-backdrop no-close-on-esc>
+    <b-modal :title="$t('project.toComment')" v-model="modal" centered @close="onClose" no-close-on-backdrop no-close-on-esc>
       <form-group xs="12" no-label no-margin>
         <b-form-rating v-model="form.star" variant="warning"/>
       </form-group>
       <form-group xs="12">
-        <b-form-textarea placeholder="Yorumunuz" rows="5" v-model="form.content" />
+        <b-form-textarea :placeholder="$t('project.toComment')" rows="5" v-model="form.content" />
       </form-group>
       <template slot="modal-footer">
         <b-button variant="light" @click="onClose">

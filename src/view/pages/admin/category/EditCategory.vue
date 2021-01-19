@@ -13,14 +13,14 @@
     <b-modal
       v-model="modal"
       @close="onClose"
-      :title="$t('common.edit')"
+      :title="$t('project.edit')"
       size="md"
       no-close-on-esc
       no-close-on-backdrop
     >
       <form-wrapper :validator="$v.form" class="av-tooltip tooltip-right-top">
         <b-row>
-          <form-group name="name" xs="12" label="Kategori Adı">
+          <form-group name="name" xs="12" :label="$t('project.categoryName')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"

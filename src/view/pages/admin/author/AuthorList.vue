@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col md="7">
-      <b-card title="Yazar Listesi">
+      <b-card :title="$t('project.authorList')">
         <b-table-simple
           borderless
           :responsive="true"
@@ -9,9 +9,9 @@
         >
           <b-thead>
             <b-tr>
-              <b-th>Yazar</b-th>
-              <b-th>Açıklama</b-th>
-              <b-th>İşlem</b-th>
+              <b-th>{{ $t('project.author') }}</b-th>
+              <b-th>{{ $t('project.description') }}</b-th>
+              <b-th>{{ $t('project.transaction') }}</b-th>
             </b-tr>
           </b-thead>
           <b-tbody>
@@ -50,9 +50,9 @@
     </b-col>
     <b-col md="5">
       <form-wrapper :validator="$v.createForm">
-        <b-card title="Yazar Ekle">
+        <b-card :title="$t('project.addAuthor')">
           <b-row>
-            <form-group name="fullName" xs="12" label="Yazar Adı">
+            <form-group name="fullName" xs="12" :label="$t('project.authorName')">
               <b-input
                 slot-scope="{ attrs, listeners }"
                 v-bind="attrs"
@@ -62,7 +62,7 @@
             </form-group>
           </b-row>
           <b-row>
-            <form-group name="description" xs="12" label="Açıklama">
+            <form-group name="description" xs="12" :label="$t('project.description')">
               <b-input
                 slot-scope="{ attrs, listeners }"
                 v-bind="attrs"
@@ -73,7 +73,7 @@
           </b-row>
           <b-row>
             <b-col>
-              <b-button @click="addAuthor">Ekle</b-button>
+              <b-button @click="addAuthor">{{ $t('project.add') }}</b-button>
             </b-col>
           </b-row>
         </b-card>
@@ -110,8 +110,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: "Yönetim Paneli" },
-      { title: "Yazar İşlemleri" }
+      { title: this.$t('project.adminPanel') },
+      { title: this.$t('project.authorTransactions') }
     ]);
 
     this.getAuthors();

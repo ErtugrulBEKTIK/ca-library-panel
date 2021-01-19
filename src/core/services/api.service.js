@@ -10,7 +10,7 @@ import JwtService from "@/core/services/jwt.service";
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
-    Vue.axios.defaults.baseURL = "http://localhost:5000/";
+    Vue.axios.defaults.baseURL = "https://ca-library-api.herokuapp.com/";
     Vue.axios.defaults.paramsSerializer = function(params) {
       return Qs.stringify(params, { arrayFormat: "brackets" });
     };

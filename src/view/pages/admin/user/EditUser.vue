@@ -20,7 +20,7 @@
     >
       <form-wrapper :validator="$v.form" class="av-tooltip tooltip-right-top">
         <b-row>
-          <form-group name="firstName" xs="12" label="Ad">
+          <form-group name="firstName" xs="12" :label="$t('project.firstName')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -28,7 +28,7 @@
               v-model="form.firstName"
             />
           </form-group>
-          <form-group name="lastName" xs="12" label="Soyad">
+          <form-group name="lastName" xs="12" :label="$t('project.lastName')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -38,7 +38,7 @@
           </form-group>
         </b-row>
         <b-row>
-          <form-group name="email" xs="12" label="Email">
+          <form-group name="email" xs="12" :label="$t('project.email')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -46,7 +46,7 @@
               v-model="form.email"
             />
           </form-group>
-          <form-group name="roleId" xs="12" label="Role" v-if="currentUser.roleId === Roles.ADMIN">
+          <form-group name="roleId" xs="12" :label="$t('project.role')" v-if="currentUser.roleId === Roles.ADMIN">
             <b-select
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"

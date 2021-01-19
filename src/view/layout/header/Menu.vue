@@ -14,11 +14,12 @@
         ]"
       >
         <a :href="href" class="menu-link" @click="navigate">
-          <span class="menu-text"> Kütüphane </span>
+          <span class="menu-text"> {{ $t('project.library') }} </span>
         </a>
       </li>
     </router-link>
     <router-link
+      v-if="isAuthenticated"
       to="/profile/detail"
       v-slot="{ href, navigate, isActive, isExactActive }"
     >
@@ -32,11 +33,12 @@
         ]"
       >
         <a :href="href" class="menu-link" @click="navigate">
-          <span class="menu-text"> Profilim </span>
+          <span class="menu-text"> {{ $t('project.profile') }} </span>
         </a>
       </li>
     </router-link>
     <router-link
+      v-if="isAuthenticated"
       to="/profile/book-history"
       v-slot="{ href, navigate, isActive, isExactActive }"
     >
@@ -50,11 +52,12 @@
         ]"
       >
         <a :href="href" class="menu-link" @click="navigate">
-          <span class="menu-text"> Okuma Geçmişim </span>
+          <span class="menu-text"> {{ $t('project.bookHistory') }} </span>
         </a>
       </li>
     </router-link>
     <router-link
+      v-if="isAuthenticated"
       to="/profile/wish-list"
       v-slot="{ href, navigate, isActive, isExactActive }"
     >
@@ -68,7 +71,7 @@
         ]"
       >
         <a :href="href" class="menu-link" @click="navigate">
-          <span class="menu-text"> İstek Listem </span>
+          <span class="menu-text"> {{ $t('project.wishList') }} </span>
         </a>
       </li>
     </router-link>
@@ -80,7 +83,7 @@
       :class="{ 'menu-item-active': hasActiveChildren('/custom') }"
     >
       <a href="#" class="menu-link menu-toggle">
-        <span class="menu-text"> Yönetim </span>
+        <span class="menu-text"> {{ $t('project.admin') }} </span>
       </a>
       <div class="menu-submenu menu-submenu-classic">
         <ul class="menu-subnav">
@@ -96,7 +99,7 @@
             >
               <a :href="href" class="menu-link menu-toggle" @click="navigate">
                 <i class="menu-icon flaticon2-open-text-book"></i>
-                <span class="menu-text"> Kitaplar </span>
+                <span class="menu-text"> {{ $t('project.books') }} </span>
               </a>
             </li>
           </router-link>
@@ -113,7 +116,7 @@
             >
               <a :href="href" class="menu-link menu-toggle" @click="navigate">
                 <i class="menu-icon flaticon2-indent-dots"></i>
-                <span class="menu-text"> Kategoriler </span>
+                <span class="menu-text"> {{ $t('project.categories') }} </span>
               </a>
             </li>
           </router-link>
@@ -129,7 +132,7 @@
             >
               <a :href="href" class="menu-link menu-toggle" @click="navigate">
                 <i class="menu-icon flaticon2-sheet"></i>
-                <span class="menu-text"> Yazarlar </span>
+                <span class="menu-text"> {{ $t('project.authors') }} </span>
               </a>
             </li>
           </router-link>
@@ -145,7 +148,7 @@
             >
               <a :href="href" class="menu-link menu-toggle" @click="navigate">
                 <i class="menu-icon flaticon2-group"></i>
-                <span class="menu-text"> Kullanıcılar </span>
+                <span class="menu-text"> {{ $t('project.users') }} </span>
               </a>
             </li>
           </router-link>
@@ -161,7 +164,7 @@
             >
               <a :href="href" class="menu-link menu-toggle" @click="navigate">
                 <i class="menu-icon flaticon2-talk"></i>
-                <span class="menu-text"> Yorumlar </span>
+                <span class="menu-text"> {{ $t('project.comments') }} </span>
               </a>
             </li>
           </router-link>
@@ -188,7 +191,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['currentUser'])
+    ...mapGetters(['currentUser', 'isAuthenticated'])
   }
 };
 </script>

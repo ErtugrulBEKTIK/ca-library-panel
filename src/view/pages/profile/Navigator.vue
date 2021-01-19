@@ -12,7 +12,7 @@
           <a class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
             {{ currentUser.firstName }} {{ currentUser.lastName }}
           </a>
-          <div class="text-muted">Üye</div>
+          <div class="text-muted">{{ $t('project.member') }}</div>
           <div class="mt-2">
             <a class="text-muted text-hover-primary">
               {{ currentUser.email }}
@@ -40,7 +40,7 @@
                   <inline-svg src="/media/svg/icons/Design/Layers.svg" />
                 </span>
               </span>
-              <span class="navi-text font-size-lg">Profile Overview</span>
+              <span class="navi-text font-size-lg">{{ $t('project.profileOverview') }}</span>
 
             </a>
           </router-link>
@@ -63,7 +63,7 @@
                   <inline-svg src="/media/svg/icons/Communication/Shield-user.svg" />
                 </span>
               </span>
-              <span class="navi-text font-size-lg">Change Password</span>
+              <span class="navi-text font-size-lg">{{ $t('project.changePassword') }}</span>
 
             </a>
           </router-link>
@@ -86,7 +86,7 @@
                   <inline-svg src="/media/svg/icons/Home/Book-open.svg" />
                 </span>
               </span>
-              <span class="navi-text font-size-lg">Book History</span>
+              <span class="navi-text font-size-lg">{{ $t('project.bookHistory') }}</span>
 
             </a>
           </router-link>
@@ -108,7 +108,7 @@
                   <inline-svg src="/media/svg/icons/General/Star.svg" />
                 </span>
               </span>
-              <span class="navi-text font-size-lg">Wish List</span>
+              <span class="navi-text font-size-lg">{{ $t('project.wishList') }}</span>
             </a>
           </router-link>
         </div>

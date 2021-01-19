@@ -13,14 +13,14 @@
     <b-modal
       v-model="modal"
       @close="onClose"
-      :title="$t('common.edit')"
+      :title="$t('project.edit')"
       size="lg"
       no-close-on-esc
       no-close-on-backdrop
     >
       <form-wrapper :validator="$v.form" class="av-tooltip tooltip-right-top">
         <b-row>
-          <form-group name="title" md="6" label="Kitap Adı">
+          <form-group name="title" md="6" :label="$t('project.bookName')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -28,7 +28,7 @@
               v-model="form.title"
             />
           </form-group>
-          <form-group name="publisher" md="6" label="Yayın Evi">
+          <form-group name="publisher" md="6" :label="$t('project.publisher')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -38,7 +38,7 @@
           </form-group>
         </b-row>
         <b-row>
-          <form-group name="authors" md="6" label="Yazarlar">
+          <form-group name="authors" md="6" :label="$t('project.authors')">
             <add-author
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -46,7 +46,7 @@
               v-model="form.authors"
             />
           </form-group>
-          <form-group name="categories" md="6" label="Kategoriler">
+          <form-group name="categories" md="6" :label="$t('project.categories')">
             <add-category
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -56,7 +56,7 @@
           </form-group>
         </b-row>
         <b-row>
-          <form-group name="year" md="6" label="Basım Yılı">
+          <form-group name="year" md="6" :label="$t('project.publishDate')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -64,7 +64,7 @@
               v-model="form.year"
             />
           </form-group>
-          <form-group name="shelf" md="6" label="Raf">
+          <form-group name="shelf" md="6" :label="$t('project.shelf')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -75,7 +75,7 @@
         </b-row>
 
         <b-row>
-          <form-group name="barcode" xs="12" label="Barkod">
+          <form-group name="barcode" xs="12" :label="$t('project.barcode')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -86,7 +86,7 @@
         </b-row>
 
         <b-row>
-          <form-group name="description" xs="12" label="Açıklama">
+          <form-group name="description" xs="12" :label="$t('project.description')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"

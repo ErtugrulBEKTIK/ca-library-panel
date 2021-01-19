@@ -17,7 +17,7 @@
               <b-col xs="12">
                 <div class="font-weight-bold">
                   {{name}}
-                  <span v-if="!id">(Yeni)</span>
+                  <span v-if="!id">({{ $t('project.newCategory') }})</span>
                 </div>
               </b-col>
             </b-row>

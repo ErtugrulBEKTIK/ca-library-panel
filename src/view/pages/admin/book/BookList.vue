@@ -4,11 +4,11 @@
       <b-card>
         <b-row class="mb-5">
           <b-col md="6">
-            <h4 class="mt-2">Kitap Listesi</h4>
+            <h4 class="mt-2">{{ $t('project.bookList') }}</h4>
           </b-col>
           <b-col md="6">
             <b-input
-              placeholder="Ara"
+              :placeholder="$t('project.search')"
               v-model="search"
             />
           </b-col>
@@ -20,14 +20,14 @@
         >
           <b-thead>
             <b-tr>
-              <b-th>Kitap Adı</b-th>
-              <b-th>Yazar(lar)</b-th>
-              <b-th>Kategoriler</b-th>
-              <b-th>Yayın Evi</b-th>
-              <b-th>Basım Yılı</b-th>
-              <b-th>Raf</b-th>
-              <b-th>Barkod</b-th>
-              <b-th style="min-width: 80px">İşlem</b-th>
+              <b-th>{{ $t('project.books') }}</b-th>
+              <b-th>{{ $t('project.authors') }}</b-th>
+              <b-th>{{ $t('project.categories') }}</b-th>
+              <b-th>{{ $t('project.publisher') }}</b-th>
+              <b-th>{{ $t('project.publishDate') }}</b-th>
+              <b-th>{{ $t('project.shelf') }}</b-th>
+              <b-th>{{ $t('project.barcode') }}</b-th>
+              <b-th style="min-width: 80px">{{ $t('project.transaction') }}</b-th>
             </b-tr>
           </b-thead>
           <b-tbody>
@@ -93,8 +93,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: "Yönetim Paneli" },
-      { title: "Kitap İşlemleri" }
+      { title: this.$t('project.adminPanel') },
+      { title: this.$t('project.bookTransactions') }
     ]);
 
     this.getBooks();

@@ -9,9 +9,9 @@
     </a>
     <b-modal v-model="modal" hide-header centered hide-footer>
       <b-tabs content-class="mt-3">
-        <b-tab title="Detay" active class="p-3">
+        <b-tab :title="$t('project.details')" active class="p-3">
           <b-row>
-            <b-col md="4"><h6>Puan</h6></b-col>
+            <b-col md="4"><h6>{{ $t('project.rating') }}</h6></b-col>
             <b-col md="8">
               <b-form-rating
                 v-if="book.comment.count !== 0"
@@ -24,38 +24,38 @@
               />
               <span class="text-muted" v-if="book.comment.count !== 0"> ({{book.comment.rating}})</span>
               <span v-if="book.comment.count === 0">
-                Hiç Puan yok
+                {{ $t('project.noRatings') }}
               </span>
             </b-col>
           </b-row>
           <b-row>
-            <b-col md="4"><h6>Kitap</h6></b-col>
+            <b-col md="4"><h6>{{ $t('project.book') }}</h6></b-col>
             <b-col md="8">{{book.title}}</b-col>
           </b-row>
           <b-row>
-            <b-col md="4"><h6>Yazar</h6></b-col>
+            <b-col md="4"><h6>{{ $t('project.author') }}</h6></b-col>
             <b-col md="8">  {{ book.authors.map(a => a.fullName).join(', ') }}</b-col>
           </b-row>
           <b-row>
-            <b-col md="4"><h6>Kategori</h6></b-col>
+            <b-col md="4"><h6>{{ $t('project.category') }}</h6></b-col>
             <b-col md="8"> {{ book.categories.map(c => c.name).join(', ') }}</b-col>
           </b-row>
           <b-row>
-            <b-col md="4"><h6>Basım Evi</h6></b-col>
+            <b-col md="4"><h6>{{ $t('project.publisher') }}</h6></b-col>
             <b-col md="8"> {{ book.publisher }}</b-col>
           </b-row>
           <b-row>
-            <b-col md="4"><h6>Basım Yılı</h6></b-col>
+            <b-col md="4"><h6>{{ $t('project.publishDate') }}</h6></b-col>
             <b-col md="8"> {{ book.year }}</b-col>
           </b-row>
           <b-row>
-            <b-col md="4"><h6>Durumu</h6></b-col>
+            <b-col md="4"><h6>{{ $t('project.status') }}</h6></b-col>
             <b-col md="8">
           <span v-if="book.status === BookStatus.AVAILABLE">
-            Rafta
+            {{ $t('project.onTheShelf') }}
           </span>
               <span v-if="book.status === BookStatus.BORROWED">
-            Dışarıda
+            {{ $t('project.outOfTheShelf') }}
           </span>
             </b-col>
           </b-row>
@@ -63,18 +63,18 @@
             <button
               v-if="book.status === BookStatus.AVAILABLE"
               @click="barrow" class="btn btn-light-primary btn-bold w-100">
-              Ödünç Al
+              {{ $t('project.borrow') }}
             </button>
             <button
               @click="addToWishList"
               class="btn btn-light-danger btn-bold w-100 mt-3">
-              İstek Listeme Ekle
+              {{ $t('project.addToWishlist') }}
             </button>
           </b-row>
         </b-tab>
-        <b-tab :title="'Yorumlar('+book.comment.count+')'" class="p-3">
+        <b-tab :title="$t('project.comments')+'('+book.comment.count+')'" class="p-3">
           <div v-if="book.comment.count === 0">
-            Henüz hiç değerlendirme yapılmamış
+            {{ $t('project.noComments') }}
           </div>
           <div v-else>
             <div>
@@ -88,7 +88,7 @@
                   <div class="d-flex flex-row justify-content-between align-content-start">
                     <div class="mb-2">
                       <h6 class="m-0"> {{comment.user}}</h6>
-                      <span class="text-muted small">{{comment.createdAt | formatDate(2)}}</span>
+                      <span class="text-muted small">{{comment.createdAt | formatDate(1)}}</span>
                     </div>
                     <b-form-rating
                       v-model="comment.star"
@@ -112,7 +112,6 @@
             ></b-pagination>
           </div>
         </b-tab>
-
       </b-tabs>
     </b-modal>
   </div>
@@ -152,11 +151,11 @@
         if(!this.isAuthenticated){
           const { isConfirmed } = await Swal.fire({
             title: "",
-            text: 'Kitap ödünç alabilmek için giriş yapmanız gerekiyor',
+            text: this.$t('project.loginFirst'),
             icon: "warning",
             confirmButtonColor: "#3699FF",
-            confirmButtonText: "Giriş Yap",
-            cancelButtonText: 'İptal',
+            confirmButtonText: this.$t('project.login'),
+            cancelButtonText: this.$t('project.cancel'),
             showCancelButton: true,
             reverseButtons: true,
             heightAuto: false
@@ -178,11 +177,11 @@
 
           const { isConfirmed } = await Swal.fire({
             title: "",
-            text: 'Kitabı ödünç almak istediğinize emin misiniz?',
+            text: this.$t('project.borrowConfirm'),
             icon: "warning",
             confirmButtonColor: "#3699FF",
-            confirmButtonText: "Onayla",
-            cancelButtonText: 'İptal',
+            confirmButtonText: this.$t('project.confirm'),
+            cancelButtonText: this.$t('project.cancel'),
             showCancelButton: true,
             reverseButtons: true,
             heightAuto: false
@@ -213,11 +212,11 @@
 
           const { isConfirmed } = await Swal.fire({
             title: "",
-            text: 'Kitabı istek listenize eklemek istediğinize emin misiniz?',
+            text: this.$t('project.wishListConfirm'),
             icon: "warning",
             confirmButtonColor: "#3699FF",
-            confirmButtonText: "Onayla",
-            cancelButtonText: 'İptal',
+            confirmButtonText: this.$t('project.confirm'),
+            cancelButtonText: this.$t('project.cancel'),
             showCancelButton: true,
             reverseButtons: true,
             heightAuto: false

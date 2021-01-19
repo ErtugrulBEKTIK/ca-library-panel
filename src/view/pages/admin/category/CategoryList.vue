@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col md="7">
-      <b-card title="Kategori Listesi">
+      <b-card :title="$t('project.categoryList')">
         <b-table-simple
           borderless
           :responsive="true"
@@ -9,8 +9,8 @@
         >
           <b-thead>
             <b-tr>
-              <b-th>Kategori</b-th>
-              <b-th>İşlem</b-th>
+              <b-th>{{ $t('project.category') }}</b-th>
+              <b-th>{{ $t('project.transaction') }}</b-th>
             </b-tr>
           </b-thead>
           <b-tbody>
@@ -49,9 +49,9 @@
     </b-col>
     <b-col md="5">
       <form-wrapper :validator="$v.createForm">
-        <b-card title="Kategori Ekle">
+        <b-card :title="$t('project.addCategory')">
           <b-row>
-            <form-group name="name" xs="12" label="Kategori Adı">
+            <form-group name="name" xs="12" :label="$t('project.categoryName')">
               <b-input
                 slot-scope="{ attrs, listeners }"
                 v-bind="attrs"
@@ -62,7 +62,7 @@
           </b-row>
           <b-row>
             <b-col>
-              <b-button @click="addCategory">Ekle</b-button>
+              <b-button @click="addCategory">{{ $t('project.add') }}</b-button>
             </b-col>
           </b-row>
         </b-card>
@@ -98,8 +98,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: "Yönetim Paneli" },
-      { title: "Kategori İşlemleri" },
+      { title: this.$t('project.adminPanel') },
+      { title: this.$t('project.categoryTransactions') }
     ]);
 
     this.getCategories();

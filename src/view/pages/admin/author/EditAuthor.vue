@@ -20,7 +20,7 @@
     >
       <form-wrapper :validator="$v.form" class="av-tooltip tooltip-right-top">
         <b-row>
-          <form-group name="fullName" xs="12" label="Yazar Adı">
+          <form-group name="fullName" xs="12" :label="$t('project.authorName')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"
@@ -30,7 +30,7 @@
           </form-group>
         </b-row>
         <b-row>
-          <form-group name="description" xs="12" label="Açıklama">
+          <form-group name="description" xs="12" :label="$t('project.description')">
             <b-input
               slot-scope="{ attrs, listeners }"
               v-bind="attrs"

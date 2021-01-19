@@ -1,10 +1,10 @@
 <template>
   <b-card class="mt-4">
     <b-tabs content-class="mt-3">
-      <b-tab title="Onay Bekleyenler" active>
+      <b-tab :title="$t('project.pendingComments')" active>
         <comments-by-status :status="0" />
       </b-tab>
-      <b-tab title="Onaylananlar">
+      <b-tab :title="$t('project.approvedComments')">
         <comments-by-status :status="1" />
       </b-tab>
     </b-tabs>
@@ -27,9 +27,10 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: "Yönetim Paneli" },
-      { title: "Yorum İşlemleri" }
+      { title: this.$t('project.adminPanel') },
+      { title: this.$t('project.commentTransactions') }
     ]);
+
 
   },
 

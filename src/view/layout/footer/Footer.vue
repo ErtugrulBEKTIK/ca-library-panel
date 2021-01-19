@@ -8,12 +8,12 @@
     >
       <!--begin::Copyright-->
       <div class="text-dark order-2 order-md-1">
-        <span class="text-muted font-weight-bold mr-2">2020©</span>
+        <span class="text-muted font-weight-bold mr-2">2021©</span>
         <a
           href="http://keenthemes.com/metronic"
           target="_blank"
           class="text-dark-75 text-hover-primary"
-          >Benim Kütüphanem</a
+          >{{ $t('project.myLibrary') }}</a
         >
       </div>
       <!--end::Copyright-->
@@ -23,13 +23,13 @@
           href="http://keenthemes.com/metronic"
           target="_blank"
           class="nav-link pr-3 pl-0"
-          >Hakkımızda</a
+          >{{ $t('project.aboutUs') }}</a
         >
         <a
           href="http://keenthemes.com/metronic"
           target="_blank"
           class="nav-link pl-3 pr-0"
-          >İletişim</a
+          >{{ $t('project.contact') }}</a
         >
       </div>
       <!--end::Nav-->

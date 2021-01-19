@@ -16,7 +16,7 @@
         class="offcanvas-header d-flex align-items-center justify-content-between mb-10"
       >
         <h3 class="font-weight-bold m-0">
-          Notifications
+          {{ $t('project.notifications') }}
           <small class="text-muted font-size-sm ml-2">24 New</small>
         </h3>
         <a

@@ -28,7 +28,7 @@
         class="offcanvas-header d-flex align-items-center justify-content-between pb-5"
       >
         <h3 class="font-weight-bold m-0">
-          Profil
+          {{ $t('project.profile') }}
         </h3>
         <a
           href="#"
@@ -59,9 +59,9 @@
               {{currentUser.firstName}} {{currentUser.lastName}}
             </a>
             <div class="text-muted mt-1">
-              <span v-if="currentUser.roleId === Roles.ADMIN">Yönetici</span>
-              <span v-if="currentUser.roleId === Roles.EDITOR">Editör</span>
-              <span v-if="currentUser.roleId === Roles.BASIC_USER">Üye</span>
+              <span v-if="currentUser.roleId === Roles.ADMIN">{{ $t('project.admin') }}</span>
+              <span v-if="currentUser.roleId === Roles.EDITOR">{{ $t('project.editor') }}</span>
+              <span v-if="currentUser.roleId === Roles.BASIC_USER">{{ $t('project.member') }}</span>
             </div>
             <div class="navi mt-2">
               <a href="#" class="navi-item">
@@ -82,7 +82,7 @@
               </a>
             </div>
             <button class="btn btn-light-primary btn-bold" @click="onLogout">
-              Çıkış Yap
+              {{ $t('project.logOut') }}
             </button>
           </div>
         </div>
@@ -110,7 +110,7 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">Profilim</div>
+                <div class="font-weight-bold">{{ $t('project.profile') }}</div>
               </div>
             </div>
           </router-link>
@@ -133,7 +133,7 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">Change Password</div>
+                <div class="font-weight-bold">{{ $t('project.changePassword') }}</div>
               </div>
             </div>
           </router-link>
@@ -154,7 +154,7 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">Book History</div>
+                <div class="font-weight-bold">{{ $t('project.bookHistory') }}</div>
               </div>
             </div>
           </router-link>
@@ -175,7 +175,7 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">Wish List</div>
+                <div class="font-weight-bold">{{ $t('project.wishList') }}</div>
               </div>
             </div>
           </router-link>

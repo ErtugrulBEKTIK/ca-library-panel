@@ -2,7 +2,7 @@
   <!-- begin:: Header Topbar -->
   <div class="topbar">
 
-    <KTDropdownNotification></KTDropdownNotification>
+    <KTDropdownNotification v-if="isAuthenticated" />
 
     <KTDropdownLanguage></KTDropdownLanguage>
     <!--begin: User Bar -->

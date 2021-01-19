@@ -1,13 +1,13 @@
 <template>
   <form-wrapper :validator="$v.createForm">
-    <b-card title="Kitap Ekle">
+    <b-card :title="$t('project.addBook')">
       <b-row>
         <form-group name="title" xs="12" no-label>
           <b-input
             slot-scope="{ attrs, listeners }"
             v-bind="attrs"
             v-on="listeners"
-            placeholder="Kitap Adı"
+            :placeholder="$t('project.bookName')"
             v-model="createForm.title"
           />
         </form-group>
@@ -19,7 +19,7 @@
             v-bind="attrs"
             v-on="listeners"
             v-model="createForm.authors"
-            placeholder="Yazarlar"
+            :placeholder="$t('project.authors')"
           />
         </form-group>
       </b-row>
@@ -30,7 +30,7 @@
             v-bind="attrs"
             v-on="listeners"
             v-model="createForm.categories"
-            placeholder="Kategoriler"
+            :placeholder="$t('project.categories')"
           />
         </form-group>
       </b-row>
@@ -41,7 +41,7 @@
             slot-scope="{ attrs, listeners }"
             v-bind="attrs"
             v-on="listeners"
-            placeholder="Yayın Evi"
+            :placeholder="$t('project.publisher')"
             v-model="createForm.publisher"
           />
         </form-group>
@@ -52,7 +52,7 @@
             slot-scope="{ attrs, listeners }"
             v-bind="attrs"
             v-on="listeners"
-            placeholder="Basım Yılı"
+            :placeholder="$t('project.publishDate')"
             v-model="createForm.year"
           />
         </form-group>
@@ -63,7 +63,7 @@
             slot-scope="{ attrs, listeners }"
             v-bind="attrs"
             v-on="listeners"
-            placeholder="Raf"
+            :placeholder="$t('project.shelf')"
             v-model="createForm.shelf"
           />
         </form-group>
@@ -74,7 +74,7 @@
             slot-scope="{ attrs, listeners }"
             v-bind="attrs"
             v-on="listeners"
-            placeholder="Barkod"
+            :placeholder="$t('project.barcode')"
             v-model="createForm.barcode"
           />
         </form-group>
@@ -85,14 +85,14 @@
             slot-scope="{ attrs, listeners }"
             v-bind="attrs"
             v-on="listeners"
-            placeholder="Açıklama"
+            :placeholder="$t('project.description')"
             v-model="createForm.description"
           />
         </form-group>
       </b-row>
       <b-row>
         <b-col>
-          <b-button @click="addBook">Ekle</b-button>
+          <b-button @click="addBook">{{ $t('project.add') }}</b-button>
         </b-col>
       </b-row>
     </b-card>

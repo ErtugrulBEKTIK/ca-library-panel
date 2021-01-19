@@ -26,7 +26,7 @@
             class="font-weight-bolder text-center font-size-h4 font-size-h1-lg"
             style="color: #986923;"
           >
-            Yeni sistemimiz ile kendine <br />harika kitaplar seçebilirsin
+            {{ $t('project.selectBookWithNewSys1') }} <br />{{ $t('project.selectBookWithNewSys2') }}
           </h3>
         </div>
         <div
@@ -60,22 +60,22 @@
                 <h3
                   class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                 >
-                  Hoş Geldiniz
+                  {{ $t('project.welcome') }}
                 </h3>
                 <span class="text-muted font-weight-bold font-size-h4"
-                  >Yeni misin?
+                  >{{ $t('project.areYouNew') }}
                   <a
                     id="kt_login_signup"
                     class="text-primary font-weight-bolder"
                     style="cursor: pointer"
                     @click="showForm('signup')"
-                    >Hesap Oluştur</a
+                    >{{ $t('project.createAnAccount') }}</a
                   ></span
                 >
               </div>
               <div class="form-group">
                 <label class="font-size-h6 font-weight-bolder text-dark"
-                  >Eposta</label
+                  >{{ $t('project.email') }}</label
                 >
                 <div
                   id="example-input-group-1"
@@ -94,14 +94,14 @@
               <div class="form-group">
                 <div class="d-flex justify-content-between mt-n5">
                   <label class="font-size-h6 font-weight-bolder text-dark pt-5"
-                    >Şifre</label
+                    >{{ $t('project.password') }}</label
                   >
                   <a
                     class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5"
                     id="kt_login_forgot"
                     style="cursor: pointer"
                     @click="showForm('forgot')"
-                    >Şifreni mi unuttun?</a
+                    >{{ $t('project.forgetPassword') }}</a
                   >
                 </div>
                 <div
@@ -124,7 +124,7 @@
                   ref="kt_login_signin_submit"
                   class="btn btn-primary font-weight-bolder font-size-h6 px-15 py-4 my-3 mr-3"
                 >
-                  Giriş Yap
+                  {{ $t('project.login') }}
                 </button>
               </div>
             </form>
@@ -141,10 +141,10 @@
                 <h3
                   class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                 >
-                  Kayıt Ol
+                  {{ $t('project.register') }}
                 </h3>
                 <p class="text-muted font-weight-bold font-size-h4">
-                  Enter your details to create your account
+                  {{ $t('project.enterDetailsToCreate') }}
                 </p>
               </div>
               <div class="d-flex justify-content-between">
@@ -152,7 +152,7 @@
                   <input
                     class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                     type="text"
-                    placeholder="Ad"
+                    :placeholder="$t('project.firstName')"
                     name="firstName"
                     ref="firstName"
                     autocomplete="off"
@@ -162,7 +162,7 @@
                   <input
                     class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                     type="text"
-                    placeholder="Soyad"
+                    :placeholder="$t('project.lastName')"
                     name="lastName"
                     ref="lastName"
                     autocomplete="off"
@@ -174,7 +174,7 @@
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="email"
-                  placeholder="Eposta"
+                  :placeholder="$t('project.email')"
                   name="email"
                   ref="remail"
                   autocomplete="off"
@@ -184,7 +184,7 @@
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="password"
-                  placeholder="Şifre"
+                  :placeholder="$t('project.password')"
                   name="password"
                   ref="rpassword"
                   autocomplete="off"
@@ -194,13 +194,13 @@
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="password"
-                  placeholder="Şifre Tekrar"
+                  :placeholder="$t('project.reNewPassword')"
                   name="cpassword"
                   ref="cpassword"
                   autocomplete="off"
                 />
               </div>
-              <div class="form-group">
+              <div class="form-group" v-if="$i18n.locale === 'tr'">
                 <label class="checkbox mb-0">
                   <input type="checkbox" name="agree" />
                   <span class="mr-2"></span>
@@ -210,13 +210,23 @@
                   kabul ediyorum.
                 </label>
               </div>
+              <div class="form-group" v-if="$i18n.locale === 'en'">
+                <label class="checkbox mb-0">
+                  <input type="checkbox" name="agree" />
+                  <span class="mr-2"></span>
+                  I agree to the
+                  <a href="#" class="ml-2 mr-1"
+                  >Privacy and Terms of Use</a
+                  >
+                </label>
+              </div>
               <div class="form-group d-flex flex-wrap pb-lg-0 pb-3">
                 <button
                   ref="kt_login_signup_submit"
                   class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
                   style="width:150px;"
                 >
-                  Kaydol
+                  {{ $t('project.register') }}
                 </button>
                 <button
                   type="button"
@@ -224,7 +234,7 @@
                   class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
                   @click="showForm('signin')"
                 >
-                  İptal
+                  {{ $t('project.cancel') }}
                 </button>
               </div>
             </form>
@@ -243,17 +253,17 @@
                 <h3
                   class="font-weight-bolder text-dark font-size-h4 font-size-h1-lg"
                 >
-                  Şifreni mi unuttun?
+                  {{ $t('project.forgetPassword') }}
                 </h3>
                 <p class="text-muted font-weight-bold font-size-h4">
-                  Şifrenizi sıfırlamak için eposta adresinizi girin
+                  {{ $t('project.enterEmailToResetPassword') }}
                 </p>
               </div>
               <div class="form-group">
                 <input
                   class="form-control form-control-solid h-auto py-7 px-6 rounded-lg font-size-h6"
                   type="email"
-                  placeholder="Eposta"
+                  :placeholder="$t('project.email')"
                   name="email"
                   autocomplete="off"
                 />
@@ -264,7 +274,7 @@
                   id="kt_login_forgot_submit"
                   class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4"
                 >
-                  Gönder
+                  {{ $t('project.send') }}
                 </button>
                 <button
                   type="button"
@@ -272,7 +282,7 @@
                   class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3"
                   @click="showForm('signin')"
                 >
-                  İptal
+                  {{ $t('project.cancel') }}
                 </button>
               </div>
             </form>
@@ -337,17 +347,17 @@ export default {
         email: {
           validators: {
             notEmpty: {
-              message: "Eposta alanı gerekli!"
+              message: this.$t('project.messages.emailRequired')
             },
             emailAddress: {
-              message: "Lütfen geçerli bir email adresi girin!"
+              message: this.$t('project.messages.emailValid')
             }
           }
         },
         password: {
           validators: {
             notEmpty: {
-              message: "Şifre alanı gerekli!"
+              message: this.$t('project.messages.passwordRequired')
             }
           }
         }
@@ -364,44 +374,44 @@ export default {
         firstName: {
           validators: {
             notEmpty: {
-              message: "Ad alanı gerekli!"
+              message: this.$t('project.messages.firstNameRequired')
             }
           }
         },
         lastName: {
           validators: {
             notEmpty: {
-              message: "Soyad alanı gerekli!"
+              message: this.$t('project.messages.lastNameRequired')
             }
           }
         },
         email: {
           validators: {
             notEmpty: {
-              message: "Email alanı gerekli!"
+              message: this.$t('project.messages.emailRequired')
             },
             emailAddress: {
-              message: "Lütfen geçerli bir email adresi girin!"
+              message: this.$t('project.messages.emailValid')
             }
           }
         },
         password: {
           validators: {
             notEmpty: {
-              message: "Şifre alanı gerekli!"
+              message: this.$t('project.messages.passwordRequired')
             }
           }
         },
         cpassword: {
           validators: {
             notEmpty: {
-              message: "Şifre tekrar alanı gerekli"
+              message: this.$t('project.messages.rePasswordRequired')
             },
             identical: {
               compare: function() {
                 return signup_form.querySelector('[name="password"]').value;
               },
-              message: "Şifreler birbiri ile uyuşmuyor"
+              message: this.$t('project.messages.passwordsNotMatched')
             }
           }
         },
@@ -409,7 +419,7 @@ export default {
           validators: {
             notEmpty: {
               message:
-                "Kullanım şartlarını ve koşulları kabul etmeniz gerekiyor!"
+                  this.$t('project.messages.needToConfirmPrivacyAndPolicy')
             }
           }
         }
@@ -426,10 +436,10 @@ export default {
         email: {
           validators: {
             notEmpty: {
-              message: "Email alanı gerekli"
+              message: this.$t('project.messages.emailRequired')
             },
             emailAddress: {
-              message: "Lütfen geçerli bir email adresi girin!"
+              message: this.$t('project.messages.emailValid')
             }
           }
         }
@@ -470,10 +480,10 @@ export default {
     this.fv.on("core.form.invalid", () => {
       Swal.fire({
         title: "",
-        text: "Lütfen alanları doğru bir şekilde girdiğinizden emin olun!",
+        text: this.$t('project.messages.sureToFillFields'),
         icon: "warning",
         confirmButtonClass: "btn btn-secondary",
-        confirmButtonText: "Tamam",
+        confirmButtonText: this.$t('project.ok'),
         heightAuto: false
       });
     });
@@ -510,7 +520,7 @@ export default {
     this.fv1.on("core.form.invalid", () => {
       Swal.fire({
         title: "",
-        text: "Please, provide correct data!",
+        text: this.$t('project.messages.sureToFillFields'),
         icon: "error",
         confirmButtonClass: "btn btn-secondary",
         heightAuto: false

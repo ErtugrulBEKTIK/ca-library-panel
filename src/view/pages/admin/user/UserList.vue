@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col md="8">
-      <b-card title="Yönetim Listesi" v-if="currentUser.roleId === Roles.ADMIN" class="mb-4">
+      <b-card :title="$t('project.adminList')" v-if="currentUser.roleId === Roles.ADMIN" class="mb-4">
         <b-table-simple
           borderless
           :responsive="true"
@@ -9,10 +9,10 @@
         >
           <b-thead>
             <b-tr>
-              <b-th>User</b-th>
-              <b-th>Email</b-th>
-              <b-th>Role</b-th>
-              <b-th>İşlem</b-th>
+              <b-th>{{ $t('project.user') }}</b-th>
+              <b-th>{{ $t('project.email') }}</b-th>
+              <b-th>{{ $t('project.role') }}</b-th>
+              <b-th>{{ $t('project.transaction') }}</b-th>
             </b-tr>
           </b-thead>
           <b-tbody>
@@ -45,7 +45,7 @@
           </b-tbody>
         </b-table-simple>
       </b-card>
-      <b-card title="Kullanıcı Listesi">
+      <b-card :title="$t('project.userList')">
         <b-table-simple
           borderless
           :responsive="true"
@@ -53,9 +53,9 @@
         >
           <b-thead>
             <b-tr>
-              <b-th>User</b-th>
-              <b-th>Email</b-th>
-              <b-th>İşlem</b-th>
+              <b-th>{{ $t('project.user') }}</b-th>
+              <b-th>{{ $t('project.email') }}</b-th>
+              <b-th>{{ $t('project.transaction') }}</b-th>
             </b-tr>
           </b-thead>
           <b-tbody>
@@ -94,11 +94,11 @@
     </b-col>
     <b-col md="4">
       <form-wrapper :validator="$v.createForm">
-        <b-card title="Kullanıcı Ekle">
+        <b-card :title="$t('project.addUser')">
           <b-row>
             <form-group name="firstName" xs="12" no-label>
               <b-input
-                placeholder="Ad"
+                :placeholder="$t('project.firstName')"
                 slot-scope="{ attrs, listeners }"
                 v-bind="attrs"
                 v-on="listeners"
@@ -109,7 +109,7 @@
           <b-row>
             <form-group name="lastName" xs="12" no-label>
               <b-input
-                placeholder="Soyad"
+                :placeholder="$t('project.lastName')"
                 slot-scope="{ attrs, listeners }"
                 v-bind="attrs"
                 v-on="listeners"
@@ -120,7 +120,7 @@
           <b-row>
             <form-group name="email" xs="12" no-label>
               <b-input
-                placeholder="Email"
+                :placeholder="$t('project.email')"
                 slot-scope="{ attrs, listeners }"
                 v-bind="attrs"
                 v-on="listeners"
@@ -136,16 +136,16 @@
                 v-on="listeners"
                 v-model="createForm.roleId"
               >
-                <b-select-option value="1">Admin</b-select-option>
-                <b-select-option value="2">Editor</b-select-option>
-                <b-select-option value="3">Basic User</b-select-option>
+                <b-select-option value="1">{{ $t('project.admin') }}</b-select-option>
+                <b-select-option value="2">{{ $t('project.editor') }}</b-select-option>
+                <b-select-option value="3">{{ $t('project.user') }}</b-select-option>
               </b-select>
             </form-group>
           </b-row>
           <b-row>
             <form-group name="password" xs="12" no-label>
               <b-input
-                placeholder="Şifre"
+                :placeholder="$t('project.password')"
                 type="password"
                 slot-scope="{ attrs, listeners }"
                 v-bind="attrs"
@@ -157,7 +157,7 @@
           <b-row>
             <form-group name="rePassword" xs="12" no-label>
               <b-input
-                placeholder="Şifre Tekrar"
+                :placeholder="$t('project.reNewPassword')"
                 type="password"
                 slot-scope="{ attrs, listeners }"
                 v-bind="attrs"
@@ -168,7 +168,7 @@
           </b-row>
           <b-row>
             <b-col>
-              <b-button @click="addUser">Ekle</b-button>
+              <b-button @click="addUser">{{ $t('project.add') }}</b-button>
             </b-col>
           </b-row>
         </b-card>
@@ -223,8 +223,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: "Yönetim Paneli" },
-      { title: "Kullanıcı İşlemleri" }
+      { title: this.$t('project.adminPanel') },
+      { title: this.$t('project.userTransactions') }
     ]);
 
     this.getData();

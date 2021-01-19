@@ -3,10 +3,10 @@
     <div class="card-header py-3">
       <div class="card-title align-items-start flex-column">
         <h3 class="card-label font-weight-bolder text-dark">
-          İstek Listem
+          {{ $t('project.wishList') }}
         </h3>
         <span class="text-muted font-weight-bold font-size-sm mt-1">
-          Dışarıda olan kitapları takip edebilirsiniz.
+          {{ $t('project.wishListInfo') }}
         </span>
       </div>
     </div>
@@ -15,9 +15,9 @@
         <table class="table table-head-custom table-vertical-center">
           <thead>
             <tr class="text-left">
-              <th class="pl-0" style="min-width: 120px">Kitap Adı</th>
-              <th style="min-width: 120px">Durumu</th>
-              <th class="pr-0" style="min-width: 50px">Action</th>
+              <th class="pl-0" style="min-width: 120px">{{ $t('project.book') }}</th>
+              <th style="min-width: 120px">{{ $t('project.status') }}</th>
+              <th class="pr-0" style="min-width: 50px">{{ $t('project.transaction') }}</th>
             </tr>
           </thead>
           <tbody>
@@ -32,12 +32,12 @@
                 <span
                   v-if="item.status === BookStatus.BORROWED"
                   class="label label-lg label-inline label-light-danger">
-                  Dışarıda
+                  {{ $t('project.outOfTheShelf') }}
                 </span>
                 <span
                   v-if="item.status === BookStatus.AVAILABLE"
                   class="label label-lg label-inline label-light-success">
-                  Alınabilir
+                  {{ $t('project.onTheShelf') }}
                 </span>
               </td>
               <td class="pr-0">
@@ -45,7 +45,7 @@
                   href="#"
                   @click="removeWish(item.id)"
                   class="btn btn-icon btn-light btn-hover-primary btn-sm"
-                  v-b-tooltip="'Kaldır'"
+                  v-b-tooltip="$t('project.remove')"
                 >
                   <span class="svg-icon svg-icon-md svg-icon-primary">
                     <inline-svg src="/media/svg/icons/General/Trash.svg" />
@@ -54,7 +54,7 @@
                 <a href="#"
                    v-if="item.status === BookStatus.AVAILABLE"
                    @click="barrow(item.bookId)"
-                   v-b-tooltip="'Ödünç Al'"
+                   v-b-tooltip="$t('project.borrow')"
                    class="btn btn-icon btn-light btn-hover-primary btn-sm ml-2">
                   <span class="svg-icon svg-icon-md svg-icon-primary">
                     <inline-svg
@@ -66,7 +66,7 @@
             </tr>
           </template>
           <tr v-if="wishes.length === 0" class="text-center">
-            <td colspan="3">Hiçbir kayıt bulunmamaktadır.</td>
+            <td colspan="3">{{ $t('project.noRecord') }}</td>
           </tr>
           </tbody>
         </table>
@@ -101,8 +101,8 @@
     },
     mounted() {
       this.$store.dispatch(SET_BREADCRUMB, [
-        { title: "Profil" },
-        { title: "Kitap Geçmişim" }
+        { title: this.$t('project.profile') },
+        { title: this.$t('project.wishList') }
       ]);
 
       this.getWishes()
@@ -124,11 +124,11 @@
         try {
           const { isConfirmed } = await Swal.fire({
             title: "",
-            text: 'Kitabı iade etmek istediğinize emin misiniz?',
+            text: this.$t('project.removeConfirm'),
             icon: "warning",
             confirmButtonColor: "#3699FF",
-            confirmButtonText: "Onayla",
-            cancelButtonText: 'İptal',
+            confirmButtonText: this.$t('project.confirm'),
+            cancelButtonText: this.$t('project.cancel'),
             showCancelButton: true,
             reverseButtons: true,
             heightAuto: false
@@ -178,11 +178,11 @@
 
           const { isConfirmed } = await Swal.fire({
             title: "",
-            text: 'Kitabı ödünç almak istediğinize emin misiniz?',
+            text: this.$t('project.borrowConfirm'),
             icon: "warning",
             confirmButtonColor: "#3699FF",
-            confirmButtonText: "Onayla",
-            cancelButtonText: 'İptal',
+            confirmButtonText: this.$t('project.confirm'),
+            cancelButtonText: this.$t('project.cancel'),
             showCancelButton: true,
             reverseButtons: true,
             heightAuto: false

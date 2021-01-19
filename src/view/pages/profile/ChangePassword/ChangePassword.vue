@@ -4,9 +4,9 @@
     <!--begin::Header-->
     <div class="card-header py-3">
       <div class="card-title align-items-start flex-column">
-        <h3 class="card-label font-weight-bolder text-dark">Şifre Değiştir</h3>
+        <h3 class="card-label font-weight-bolder text-dark">{{ $t('project.changePassword') }}</h3>
         <span class="text-muted font-weight-bold font-size-sm mt-1">
-          Hesap şifrenizi değiştirebilirsiniz
+          {{ $t('project.canChangePassword') }}
         </span>
       </div>
       <div class="card-toolbar">
@@ -15,7 +15,7 @@
           :disabled="loading"
           @click="submit()"
         >
-          Save Changes
+          {{ $t('project.saveChanges') }}
         </b-button>
       </div>
     </div>
@@ -26,7 +26,7 @@
 
         <div class="form-group row">
           <label class="col-xl-3 col-lg-3 col-form-label text-right">
-            Güncel Şifre
+            {{ $t('project.currentPassword') }}
           </label>
           <form-group name="oldPassword" lg="9" xl="6" no-label no-margin>
             <b-input
@@ -41,7 +41,7 @@
         </div>
         <div class="form-group row">
           <label class="col-xl-3 col-lg-3 col-form-label text-right">
-            Yeni Şifre
+            {{ $t('project.newPassword') }}
           </label>
           <form-group name="newPassword" lg="9" xl="6" no-label no-margin>
             <b-input
@@ -56,7 +56,7 @@
         </div>
         <div class="form-group row">
           <label class="col-xl-3 col-lg-3 col-form-label text-right">
-            Yeni Şifre Tekrar
+            {{ $t('project.reNewPassword') }}
           </label>
           <form-group name="reNewPassword" lg="9" xl="6" no-label no-margin>
             <b-input
@@ -99,8 +99,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
-      { title: "Profil" },
-      { title: "Şifre Değiştir" }
+      { title: this.$t('project.profile') },
+      { title: this.$t('project.changePassword') }
     ]);
   },
   methods: {

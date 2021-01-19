@@ -18,7 +18,7 @@
     <b-dropdown-text tag="div" class="min-w-md-350px">
       <form>
         <div class="p-4">
-          <h3 class="mb-5">Notifications</h3>
+          <h3 class="mb-5">{{ $t('project.notifications') }}</h3>
           <vue-perfect-scrollbar
             :settings="{wheelPropagation: false}"
             style="position: relative; max-height: 300px;"
@@ -36,18 +36,18 @@
                   to="/profile/wish-list"
                   class="text-dark text-hover-primary mb-1 font-size-lg"
                 >
-                  İstek Kitap - {{ item.bookTitle }}
+                  {{ $t('project.bookRequest') }} - {{ item.bookTitle }}
                 </router-link>
 
                 <span class="text-muted">
-                  Kitap hazır seni bekliyor!
+                  {{ $t('project.bookWaiting') }}
                 </span>
               </div>
               <!--end::Text-->
             </div>
 
             <div v-if="notifications.length === 0">
-              Hiç bildiriminiz yok
+              {{ $t('project.noNotification') }}
             </div>
           </vue-perfect-scrollbar>
         </div>

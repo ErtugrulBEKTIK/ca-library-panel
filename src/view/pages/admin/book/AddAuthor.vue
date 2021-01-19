@@ -17,7 +17,7 @@
               <b-col xs="12">
                 <div class="font-weight-bold">
                   {{fullName}}
-                  <span v-if="!id">(Yeni)</span>
+                  <span v-if="!id">({{ $t('project.newAuthor') }})</span>
                 </div>
               </b-col>
             </b-row>

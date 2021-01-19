@@ -7,11 +7,11 @@
     >
       <b-thead>
         <b-tr>
-          <b-th style="min-width: 150px">User</b-th>
-          <b-th>Book</b-th>
-          <b-th>Comment</b-th>
-          <b-th>Star</b-th>
-          <b-th style="min-width: 80px">İşlem</b-th>
+          <b-th style="min-width: 150px">{{ $t('project.user') }}</b-th>
+          <b-th>{{ $t('project.book') }}</b-th>
+          <b-th>{{ $t('project.comment') }}</b-th>
+          <b-th>{{ $t('project.rating') }}</b-th>
+          <b-th style="min-width: 80px">{{ $t('project.transaction') }}</b-th>
         </b-tr>
       </b-thead>
       <b-tbody>
@@ -37,7 +37,7 @@
                 size="xs"
                 variant="light-primary"
                 class="btn-icon mr-2"
-                v-b-tooltip="'Onayla'"
+                v-b-tooltip="$t('project.approve')"
               >
                 <span class="svg-icon">
                   <inline-svg src="/media/svg/icons/Navigation/Check.svg" />
@@ -48,7 +48,7 @@
                 size="xs"
                 variant="light-danger"
                 class="btn-icon"
-                v-b-tooltip="'Sil'"
+                v-b-tooltip="$t('project.remove')"
               >
                 <span class="svg-icon">
                   <inline-svg src="/media/svg/icons/General/Trash.svg" />
@@ -58,7 +58,7 @@
           </b-tr>
         </template>
         <tr v-if="comments.length === 0" class="text-center">
-          <td colspan="5">Hiçbir kayıt bulunmamaktadır.</td>
+          <td colspan="5">{{ $t('project.noRecord') }}</td>
         </tr>
       </b-tbody>
     </b-table-simple>
