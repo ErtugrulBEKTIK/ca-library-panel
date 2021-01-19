@@ -128,6 +128,9 @@ export const locale = {
       "loginNotAllowed": "Sisteme giriş izniniz yok!",
       "oldPasswordWrong": "Girdiğiniz eski şifre yanlış!",
       "somethingWentWrong": "İşlem esnasında hata meydana geldi!",
+      "borrowSuccessful": "Kitap başarıyla ödünç alındı!",
+      "addToWishSuccessful": "Kitap başarıyla istek listesine eklendi!",
+      "returnSuccessful": "Kitap başarıyla iade edildi!",
     },
     "swal": {
       "confirmDelete": "Emin misiniz?",

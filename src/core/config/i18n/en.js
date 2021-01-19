@@ -128,6 +128,9 @@ export const locale = {
       "loginNotAllowed": "You have not login permission!",
       "oldPasswordWrong": "You entered old password wrong!",
       "somethingWentWrong": "Something went wrong!",
+      "borrowSuccessful": "Book borrowing successfully!",
+      "addToWishSuccessful": "Book added to wish list successfully!",
+      "returnSuccessful": "Book returned successfully!",
     },
     "swal": {
       "confirmDelete": "Are you sure?",

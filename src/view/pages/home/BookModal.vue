@@ -8,7 +8,7 @@
       </span>
     </a>
     <b-modal v-model="modal" hide-header centered hide-footer>
-      <b-tabs content-class="mt-3">
+      <b-tabs content-class="mt-3" v-if="!loading">
         <b-tab :title="$t('project.details')" active class="p-3">
           <b-row>
             <b-col md="4"><h6>{{ $t('project.rating') }}</h6></b-col>
@@ -113,6 +113,9 @@
           </div>
         </b-tab>
       </b-tabs>
+      <div class="text-center" v-if="loading">
+        <b-spinner variant="primary" />
+      </div>
     </b-modal>
   </div>
 </template>
@@ -132,6 +135,7 @@
         pageSize: 10,
         pageNumber: 1,
         totalRows: null,
+        loading: false
       }
     },
     methods: {
@@ -187,19 +191,19 @@
             heightAuto: false
           });
           if(isConfirmed){
+            this.loading = true;
             await this.axios.post("profile/bookings", {
               bookId: this.book.id
             });
 
             await this.$router.push('/profile/book-history');
 
-            this.toast({ message: 'createSuccess', item: 'book' });
+            this.toast({ message: 'borrowSuccessful' });
 
           }
 
-        }catch (e) {
-          this.toast({ type: "danger", message: "createError", item: "book" });
-
+        } catch (e) {
+          this.toast({ type: "danger", message: "somethingWentWrong" });
           console.log(e);
         }
       },
@@ -222,18 +226,18 @@
             heightAuto: false
           });
           if(isConfirmed){
+            this.loading = true;
             await this.axios.post("profile/wishes", {
               bookId: this.book.id
             });
 
             this.modal = false;
-            this.toast({ message: 'createSuccess', item: 'book' });
+            this.toast({ message: 'addToWishSuccessful' });
 
           }
 
-        }catch (e) {
-          this.toast({ type: "danger", message: "createError", item: "book" });
-
+        } catch (e) {
+          this.toast({ type: "danger", message: "somethingWentWrong" });
           console.log(e);
         }
       }

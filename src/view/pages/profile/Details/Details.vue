@@ -13,10 +13,11 @@
         <button
           type="reset"
           class="btn btn-success mr-2"
+          :disabled="submitting"
           @click="submit()"
           ref="kt_save_changes"
         >
-          {{ $t('project.saveChanges') }}
+          {{ $t('project.saveChanges') }} <b-spinner small v-if="submitting" />
         </button>
         <button type="reset" class="btn btn-secondary" @click="reset()">
           {{ $t('project.cancel') }}
@@ -134,6 +135,7 @@
           email: '',
           avatar: ''
         },
+        submitting: false,
         avatars,
       };
     },
@@ -163,6 +165,7 @@
       },
       async submit() {
         try {
+          this.submitting = true;
           this.$v.form.$touch();
           if (this.$v.form.$anyError) {
             this.toast({ type: 'danger', message: 'validationError' });
@@ -182,6 +185,8 @@
         } catch (e) {
           this.toast({ type: "danger", message: "updateError", item: "profile" });
           console.log(e);
+        }finally {
+          this.submitting = false;
         }
       }
     },

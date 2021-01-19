@@ -157,11 +157,11 @@
             bookingId
           });
 
-          this.toast({ message: 'deleteSuccess', item: 'book' });
+          this.toast({ message: 'returnSuccessful' });
 
           this.getBookings()
         } catch (e) {
-          this.toast({ type: "danger", message: "deleteError", item: "book" });
+          this.toast({ type: "danger", message: "somethingWentWrong" });
           console.log(e);
         }
       },

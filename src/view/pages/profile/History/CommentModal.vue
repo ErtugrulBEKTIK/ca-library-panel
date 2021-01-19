@@ -72,7 +72,6 @@
             }
           }
 
-
           setTimeout(() => {
             this.saved = true;
           }, 200);
@@ -83,6 +82,7 @@
         }
       },
       async submit(){
+        const mode = this.isNew ? 'create' : 'update';
         try {
           this.submitting = true;
           const method = this.isNew ? 'post' : 'patch';
@@ -92,10 +92,10 @@
           });
 
           this.modal = false;
-          this.toast({ message: 'createSuccess', item: 'book' });
+          this.toast({ message: mode+'Success', item: 'comment' });
 
         }catch (e) {
-          this.toast({ type: "danger", message: "createError", item: "book" });
+          this.toast({ type: "danger", message: mode+"Error", item: "comment" });
           console.log(e);
         } finally {
           this.submitting = false;

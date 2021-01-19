@@ -12,10 +12,10 @@
       <div class="card-toolbar">
         <b-button
           variant="success"
-          :disabled="loading"
+          :disabled="submitting"
           @click="submit()"
         >
-          {{ $t('project.saveChanges') }}
+          {{ $t('project.saveChanges') }} <b-spinner small v-if="submitting" />
         </b-button>
       </div>
     </div>
@@ -94,7 +94,7 @@ export default {
         newPassword: '',
         reNewPassword: ''
       },
-      loading: false
+      submitting: false
     };
   },
   mounted() {
@@ -106,7 +106,7 @@ export default {
   methods: {
     async submit() {
       try {
-        this.loading = true;
+        this.submitting = true;
         this.$v.form.$touch();
         if (this.$v.form.$anyError) {
           this.toast({ type: 'danger', message: 'validationError' });
@@ -126,7 +126,7 @@ export default {
           console.log(e);
         }
       }finally {
-        this.loading = false;
+        this.submitting = false;
       }
 
     },
